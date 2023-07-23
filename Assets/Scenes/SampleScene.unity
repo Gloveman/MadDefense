@@ -898,6 +898,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 010bbdab657f8b94d9e8e37bc98e892b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  map: {fileID: 2060901761}
+  testone: {fileID: 11400000, guid: eb0d7e8d8bb96bd49a75fb8331b4d3ec, type: 2}
   currentGameState: 0
 --- !u!4 &1975579682
 Transform:

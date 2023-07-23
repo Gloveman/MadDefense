@@ -53,5 +53,9 @@ let map={
 
 wss.on('connection',(client)=>{
 
+    // client.on("message",(data)=>{
+    //     if(data=="목록")
+
+    // });
     client.send(JSON.stringify(map));
 });
