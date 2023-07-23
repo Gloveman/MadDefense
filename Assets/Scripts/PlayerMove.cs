@@ -3,9 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
+using Photon.Realtime;
+using Photon.Pun;
 
-public class NewBehaviourScript : MonoBehaviour
+public class NewBehaviourScript : MonoBehaviourPun
 {
+
+    public static GameObject LocalPlayerInstance=null;
     Rigidbody2D rigid2D;
     SpriteRenderer spriteRenderer;
     Animator animator;
@@ -22,8 +26,16 @@ public class NewBehaviourScript : MonoBehaviour
     private enum State { idle, run, jump, fall, hurt }; // idle은 0, run은 1 이런 식으로 순차적 대응 (enum의 특징)
     private State state = State.idle; // 시작 상태는 idle(0)이다
 
-    public GameManager manager;
+    public static GameManager manager;
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        if (photonView.IsMine)
+           LocalPlayerInstance = gameObject;
+        DontDestroyOnLoad(gameObject);
+    }
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -36,12 +48,17 @@ public class NewBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!photonView.IsMine && PhotonNetwork.IsConnected)
+            return;
         if(manager.currentGameState == GameState.inGame)
         {
 
             raycastHit2D = Physics2D.Raycast(rigid2D.position, Vector3.down, 0.7f, LayerMask.GetMask("Platform"));
 
-            Flip();
+
+            //Flip();
+            if(photonView.IsMine&&HorizontalInput!=0)
+                photonView.RPC("flip",RpcTarget.AllBuffered, HorizontalInput);
 
             switch (state)
             {
@@ -81,7 +98,7 @@ public class NewBehaviourScript : MonoBehaviour
                 case State.hurt:
                     break;
             }
-            Debug.Log(animator.GetInteger("state") != (int)state);
+           // Debug.Log(animator.GetInteger("state") != (int)state);
             if (animator.GetInteger("state") != (int)state)
                 animator.SetInteger("state", (int)state);
         }
@@ -98,20 +115,23 @@ public class NewBehaviourScript : MonoBehaviour
     {
         rigid2D.velocity = new Vector2(HorizontalInput * speed , rigid2D.velocity.y);
     }
-    private void Flip()
-    {
-        if (HorizontalInput < 0)
-        {
-            spriteRenderer.flipX = true;
-        }
-        else if (HorizontalInput > 0)
-        {
-            spriteRenderer.flipX = false;
-        }
-    }
+
     private void Jump()
     {
         rigid2D.velocity = new Vector2(rigid2D.velocity.x, jumpForce);
+    }
+
+    [PunRPC]
+    void flip(float x)
+    {
+        if (x < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if (x > 0)
+        {
+            spriteRenderer.flipX = false;
+        }
     }
 }
 

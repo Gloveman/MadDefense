@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void StartGame()
     {
+
         SetGameState(GameState.inGame);
     }
 
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     private void Awake()
     {
         instance = this;
+        NewBehaviourScript.manager = this;
     }
 
     
@@ -100,10 +102,14 @@ public class GameManager : MonoBehaviourPunCallbacks
             isparsed = true;
         }
 
+        if (NewBehaviourScript.LocalPlayerInstance == null)
+        {
+            PhotonNetwork.Instantiate("Player", new Vector3(0, 4, 0), Quaternion.identity, 0);
+            Debug.Log("Added player");
+        }
 
 
-
-        currentGameState = GameState.menu;
+        currentGameState = GameState.inGame;
     }
 
     // Update is called once per frame
@@ -121,7 +127,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             }
         }
 
-        Debug.Log(currentGameState.ToString());
+        //Debug.Log(currentGameState.ToString());
         switch (currentGameState)
         {
             case GameState.menu:
@@ -162,7 +168,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void LoadScene()
     {
-        PhotonNetwork.LoadLevel("GameScene");
+        PhotonNetwork.LoadLevel("SampleScene");
     }
 
     public void LeaveRoom()

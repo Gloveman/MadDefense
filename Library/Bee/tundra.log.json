@@ -95,8 +95,8 @@
 {"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/Unity.InternalAPIEngineBridge.001.dll","enqueuedNodeIndex":93,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
 {"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/Unity.2D.Common.Runtime.dll","enqueuedNodeIndex":94,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
 {"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/UnityEngine.UI.dll","enqueuedNodeIndex":95,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
-{"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/Unity.Timeline.dll","enqueuedNodeIndex":96,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
-{"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/PhotonRealtime.dll","enqueuedNodeIndex":97,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
+{"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/PhotonRealtime.dll","enqueuedNodeIndex":96,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
+{"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/Unity.Timeline.dll","enqueuedNodeIndex":97,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
 {"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/PhotonUnityNetworking.dll","enqueuedNodeIndex":98,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
 {"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/Unity.Collections.dll","enqueuedNodeIndex":99,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
 {"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/Unity.2D.SpriteShape.Runtime.dll","enqueuedNodeIndex":100,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
@@ -108,8 +108,8 @@
 {"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/Unity.Collections.LowLevel.ILSupport.dll","enqueuedNodeIndex":106,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
 {"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/websocket-sharp.dll","enqueuedNodeIndex":107,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
 {"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/Unity.VisualScripting.Antlr3.Runtime.dll","enqueuedNodeIndex":108,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
-{"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/Unity.Burst.Unsafe.dll","enqueuedNodeIndex":109,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
-{"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/Photon3Unity3D.dll","enqueuedNodeIndex":110,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
+{"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/Photon3Unity3D.dll","enqueuedNodeIndex":109,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
+{"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/Unity.Burst.Unsafe.dll","enqueuedNodeIndex":110,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
 {"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/Newtonsoft.Json.dll","enqueuedNodeIndex":111,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
 {"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/System.Runtime.dll","enqueuedNodeIndex":112,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
 {"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/netstandard.dll","enqueuedNodeIndex":113,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
@@ -211,8 +211,8 @@
 {"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/Unity.InternalAPIEngineBridge.001.pdb","enqueuedNodeIndex":209,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
 {"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/Unity.2D.Common.Runtime.pdb","enqueuedNodeIndex":210,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
 {"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/UnityEngine.UI.pdb","enqueuedNodeIndex":211,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
-{"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/Unity.Timeline.pdb","enqueuedNodeIndex":212,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
-{"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/PhotonRealtime.pdb","enqueuedNodeIndex":213,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
+{"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/PhotonRealtime.pdb","enqueuedNodeIndex":212,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
+{"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/Unity.Timeline.pdb","enqueuedNodeIndex":213,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
 {"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/PhotonUnityNetworking.pdb","enqueuedNodeIndex":214,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
 {"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/Unity.Collections.pdb","enqueuedNodeIndex":215,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
 {"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Managed/Unity.2D.SpriteShape.Runtime.pdb","enqueuedNodeIndex":216,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
@@ -252,11 +252,3 @@
 {"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/UnityCrashHandler64.exe","enqueuedNodeIndex":250,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
 {"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/UnityPlayer.dll","enqueuedNodeIndex":251,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
 {"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/WinPixEventRuntime.dll","enqueuedNodeIndex":252,"enqueueingNodeAnnotation":"Player","enqueueingNodeIndex":253}
-{"msg":"newNode","annotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Plugins/x86_64/lib_burst_generated.pdb","index":225}
-{"msg":"runNodeAction","annotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Plugins/x86_64/lib_burst_generated.pdb","displayName":"Copying lib_burst_generated.pdb","index":225}
-{"msg":"noderesult","processed_node_count":234,"number_of_nodes_ever_queued":253,"annotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Plugins/x86_64/lib_burst_generated.pdb","index":225,"exitcode":0,"outputfile":"C:\\Users\\MSI\\Downloads\\GameTest\\My project_Data\\Plugins\\x86_64\\lib_burst_generated.pdb"}
-{"msg":"newNode","annotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Plugins/x86_64/lib_burst_generated.dll","index":224}
-{"msg":"runNodeAction","annotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Plugins/x86_64/lib_burst_generated.dll","displayName":"Copying lib_burst_generated.dll","index":224}
-{"msg":"noderesult","processed_node_count":251,"number_of_nodes_ever_queued":253,"annotation":"CopyFiles C:/Users/MSI/Downloads/GameTest/My project_Data/Plugins/x86_64/lib_burst_generated.dll","index":224,"exitcode":0,"outputfile":"C:\\Users\\MSI\\Downloads\\GameTest\\My project_Data\\Plugins\\x86_64\\lib_burst_generated.dll"}
-{"msg":"newNode","annotation":"Player","index":253}
-{"msg":"runNodeAction","annotation":"Player","index":253}
