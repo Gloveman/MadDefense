@@ -9,6 +9,13 @@ using Photon.Realtime;
 using UnityEngine.SceneManagement;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
+public enum GameState
+{
+    waiting,
+    menu,
+    inGame,
+    gameOver
+}
 public class TutorialGameManager : MonoBehaviourPunCallbacks
 {
 
@@ -23,9 +30,7 @@ public class TutorialGameManager : MonoBehaviourPunCallbacks
     {
         SetGameState(GameState.inGame);
         time = 300f;
-        CameraMove.player = Player;
-        Rigidbody2D playerRigidbody2D = Player.GetComponent<Rigidbody2D>();
-        playerRigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX;
+        Offline_CameraMove.player = Player;
     }
 
     public void GameOver()

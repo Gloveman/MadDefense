@@ -58,22 +58,25 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.5f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Online\ItemControl.cs" />
     <Compile Include="Assets\Photon\PhotonRealtime\Demos\DemoLoadBalancing\ConnectAndJoinRandomLb.cs" />
     <Compile Include="Assets\Scripts\tile.cs" />
-    <Compile Include="Assets\Scripts\Offline\UI_InGame.cs" />
     <Compile Include="Assets\Scripts\Offline\TutorialGameManager.cs" />
     <Compile Include="Assets\Photon\PhotonLibs\WebSocket\WebSocket.cs" />
     <Compile Include="Assets\Scripts\TileMap.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
-    <Compile Include="Assets\Scripts\PlayerMove.cs" />
-    <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Online\UI_InGame.cs" />
+    <Compile Include="Assets\Scripts\Offline\Offline_ItemControl.cs" />
     <Compile Include="Assets\Scripts\movecamera.cs" />
     <Compile Include="Assets\scripts.cs" />
-    <Compile Include="Assets\Scripts\CameraMove.cs" />
+    <Compile Include="Assets\Scripts\Online\CameraMove.cs" />
     <Compile Include="Assets\Scripts\inputcontroller.cs" />
-    <Compile Include="Assets\Scripts\Offline\OfflinePlayerMove.cs" />
+    <Compile Include="Assets\Scripts\Online\PlayerMove.cs" />
+    <Compile Include="Assets\Scripts\Offline\Offline_UI_InGame.cs" />
+    <Compile Include="Assets\Scripts\Online\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Offline\Offline_PlayerMove.cs" />
     <Compile Include="Assets\Photon\PhotonLibs\WebSocket\SocketWebTcp.cs" />
-    <Compile Include="Assets\Scripts\Offline\ItemControl.cs" />
+    <Compile Include="Assets\Scripts\Offline\Offline_CameraMove.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -375,15 +378,6 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Assets\Packages\Newtonsoft.Json.13.0.3\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Android.Types">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.5f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Android.Gradle">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.5f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Gradle.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Android.GradleProject">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.5f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.GradleProject.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.5f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>

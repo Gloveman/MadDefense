@@ -128,68 +128,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1127138122361213857, guid: 0930292c89819584897018945822608f, type: 3}
   m_PrefabInstance: {fileID: 1657991207}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &897304186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 897304178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 015186a27920a5743aaf7ce1ccc7703f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!60 &897304193
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 897304178}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.03125, y: 1}
-    newSize: {x: 1.03125, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.20662683, y: 0.18798715}
-      - {x: -0.19838437, y: 0.18670627}
-      - {x: -0.33815253, y: -0.1423759}
-      - {x: -0.24036312, y: -0.49712768}
-      - {x: 0.1510386, y: -0.5023851}
-  m_UseDelaunayMesh: 0
 --- !u!1 &980598461
 GameObject:
   m_ObjectHideFlags: 0
@@ -1021,42 +959,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: OfflinePlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 1127138122361213857, guid: 0930292c89819584897018945822608f, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 5393569556605390271, guid: 0930292c89819584897018945822608f, type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 980598464}
-    - target: {fileID: 5393569556605390271, guid: 0930292c89819584897018945822608f, type: 3}
-      propertyPath: jumpForce
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5683933328355455830, guid: 0930292c89819584897018945822608f, type: 3}
-      propertyPath: m_Size.y
-      value: 0.622697
-      objectReference: {fileID: 0}
-    - target: {fileID: 5683933328355455830, guid: 0930292c89819584897018945822608f, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.04826784
-      objectReference: {fileID: 0}
-    - target: {fileID: 5683933328355455830, guid: 0930292c89819584897018945822608f, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.12701721
-      objectReference: {fileID: 0}
-    - target: {fileID: 5683933328355455830, guid: 0930292c89819584897018945822608f, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5683933328355455830, guid: 0930292c89819584897018945822608f, type: 3}
-      propertyPath: m_EdgeRadius
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6757227877776477091, guid: 0930292c89819584897018945822608f, type: 3}
-      propertyPath: m_LinearDrag
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8845635306580573219, guid: 0930292c89819584897018945822608f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1100,13 +1002,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1127138122361213857, guid: 0930292c89819584897018945822608f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 897304186}
-    - targetCorrespondingSourceObject: {fileID: 1127138122361213857, guid: 0930292c89819584897018945822608f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 897304193}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0930292c89819584897018945822608f, type: 3}
 --- !u!1 &1878492211
 GameObject:
