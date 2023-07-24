@@ -1,13 +1,21 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp:
-    - NewBehaviourScript
+    - OfflinePlayerMove
+    - PlayerMove
     Assembly-CSharp.dll:
     - CameraMove
     - GameManager
+    - ItemControll
     - MainMenu
-    - NewBehaviourScript
+    - OfflinePlayerMove
+    - TileMap
+    - TutorialGameManager
+    - UI_InGame
+    - inputcontroller
+    - movecamera
     - scripts
+    - tile
     PhotonUnityNetworking:
     - Photon.Pun.PhotonAnimatorView
     - Photon.Pun.PhotonRigidbody2DView
@@ -15,10 +23,6 @@ ScriptsOnlyBuild:
     - Photon.Pun.PhotonView
     - Photon.Pun.ServerSettings
     PhotonUnityNetworking.dll:
-    - Photon.Pun.PhotonAnimatorView
-    - Photon.Pun.PhotonRigidbody2DView
-    - Photon.Pun.PhotonTransformViewClassic
-    - Photon.Pun.PhotonView
     - Photon.Pun.ServerSettings
     Unity.2D.Animation.Editor.dll:
     - UnityEditor.U2D.Animation.BoneGizmo
@@ -53,6 +57,7 @@ ScriptsOnlyBuild:
     - TMPro.TMP_StyleSheet
     Unity.TextMeshPro.dll:
     - TMPro.TMP_FontAsset
+    - TMPro.TMP_InputField
     - TMPro.TMP_Settings
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
@@ -60,10 +65,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -74,9 +77,12 @@ ScriptsOnlyBuild:
     - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
+    - UnityEngine.UI.ContentSizeFitter
     - UnityEngine.UI.GraphicRaycaster
+    - UnityEngine.UI.GridLayoutGroup
     - UnityEngine.UI.Image
-    - UnityEngine.UI.Text
+    - UnityEngine.UI.LayoutElement
+    - UnityEngine.UI.RectMask2D
   serializedClasses:
     PhotonRealtime:
     - Photon.Realtime.AppSettings
@@ -96,6 +102,11 @@ ScriptsOnlyBuild:
     - TMPro.TMP_GlyphAdjustmentRecord
     - TMPro.TMP_GlyphPairAdjustmentRecord
     - TMPro.TMP_GlyphValueRecord
+    - TMPro.TMP_InputField/OnChangeEvent
+    - TMPro.TMP_InputField/SelectionEvent
+    - TMPro.TMP_InputField/SubmitEvent
+    - TMPro.TMP_InputField/TextSelectionEvent
+    - TMPro.TMP_InputField/TouchScreenKeyboardEvent
     - TMPro.TMP_Sprite
     - TMPro.TMP_SpriteCharacter
     - TMPro.TMP_SpriteGlyph
@@ -105,6 +116,7 @@ ScriptsOnlyBuild:
     - UnityEngine.Events.ArgumentCache
     - UnityEngine.Events.PersistentCallGroup
     - UnityEngine.Events.PersistentListenerMode
+    - UnityEngine.RectOffset
     UnityEngine.TextCoreFontEngineModule:
     - UnityEngine.TextCore.FaceInfo
     - UnityEngine.TextCore.Glyph
@@ -114,11 +126,43 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.AnimationTriggers
     - UnityEngine.UI.Button/ButtonClickedEvent
     - UnityEngine.UI.ColorBlock
-    - UnityEngine.UI.FontData
     - UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
     - UnityEngine.UI.Navigation
     - UnityEngine.UI.SpriteState
   methodsToPreserve:
+  - assembly: Assembly-CSharp
+    fullTypeName: inputcontroller
+    methodName: SetTileType
+  - assembly: Assembly-CSharp
+    fullTypeName: inputcontroller
+    methodName: SetTileType
+  - assembly: Assembly-CSharp
+    fullTypeName: inputcontroller
+    methodName: SetTileType
+  - assembly: Assembly-CSharp
+    fullTypeName: inputcontroller
+    methodName: SetTileType
+  - assembly: Assembly-CSharp
+    fullTypeName: inputcontroller
+    methodName: SetTileType
+  - assembly: Assembly-CSharp
+    fullTypeName: inputcontroller
+    methodName: SetTileType
+  - assembly: Assembly-CSharp
+    fullTypeName: TileMap
+    methodName: GenerateMap
+  - assembly: UnityEngine.CoreModule
+    fullTypeName: UnityEngine.GameObject
+    methodName: SetActive
+  - assembly: Assembly-CSharp
+    fullTypeName: movecamera
+    methodName: SetupCamera
+  - assembly: Assembly-CSharp
+    fullTypeName: inputcontroller
+    methodName: SetTileType
+  - assembly: Assembly-CSharp
+    fullTypeName: MainMenu
+    methodName: OpenTutorial
   - assembly: Assembly-CSharp
     fullTypeName: MainMenu
     methodName: Connect
@@ -136,13 +180,68 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 16678}
+    - Class: 114
+      Script: {instanceID: 17956}
+    - Class: 114
+      Script: {instanceID: 18212}
+    - Class: 114
+      Script: {instanceID: 18568}
+    - Class: 114
+      Script: {instanceID: 21114}
+    - Class: 114
+      Script: {instanceID: 21838}
+    - Class: 114
+      Script: {instanceID: 22054}
+    - Class: 114
+      Script: {instanceID: 22460}
+    - Class: 114
+      Script: {instanceID: 24948}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    Assets/Scenes/Map Editor.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
     - Class: 49
       Script: {instanceID: 0}
     - Class: 50
       Script: {instanceID: 0}
+    - Class: 58
+      Script: {instanceID: 0}
     - Class: 61
       Script: {instanceID: 0}
     - Class: 62
+      Script: {instanceID: 0}
+    - Class: 65
       Script: {instanceID: 0}
     - Class: 74
       Script: {instanceID: 0}
@@ -155,41 +254,59 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 16674}
+      Script: {instanceID: 16678}
     - Class: 114
-      Script: {instanceID: 17030}
+      Script: {instanceID: 16824}
     - Class: 114
-      Script: {instanceID: 17406}
+      Script: {instanceID: 17034}
     - Class: 114
-      Script: {instanceID: 17952}
+      Script: {instanceID: 17418}
     - Class: 114
-      Script: {instanceID: 18064}
+      Script: {instanceID: 17956}
     - Class: 114
-      Script: {instanceID: 18208}
+      Script: {instanceID: 18068}
     - Class: 114
-      Script: {instanceID: 18456}
+      Script: {instanceID: 18212}
     - Class: 114
-      Script: {instanceID: 18562}
+      Script: {instanceID: 18460}
     - Class: 114
-      Script: {instanceID: 19862}
+      Script: {instanceID: 18468}
     - Class: 114
-      Script: {instanceID: 20186}
+      Script: {instanceID: 18568}
+    - Class: 114
+      Script: {instanceID: 18778}
+    - Class: 114
+      Script: {instanceID: 19844}
+    - Class: 114
+      Script: {instanceID: 19868}
+    - Class: 114
+      Script: {instanceID: 20190}
+    - Class: 114
+      Script: {instanceID: 20676}
+    - Class: 114
+      Script: {instanceID: 20872}
     - Class: 114
       Script: {instanceID: 21114}
     - Class: 114
-      Script: {instanceID: 21454}
+      Script: {instanceID: 21838}
     - Class: 114
-      Script: {instanceID: 21840}
+      Script: {instanceID: 22054}
     - Class: 114
-      Script: {instanceID: 22464}
+      Script: {instanceID: 22460}
     - Class: 114
-      Script: {instanceID: 22472}
+      Script: {instanceID: 22468}
     - Class: 114
-      Script: {instanceID: 24420}
+      Script: {instanceID: 24452}
     - Class: 114
-      Script: {instanceID: 24464}
+      Script: {instanceID: 24952}
     - Class: 114
-      Script: {instanceID: 24884}
+      Script: {instanceID: 26310}
+    - Class: 114
+      Script: {instanceID: 26314}
+    - Class: 114
+      Script: {instanceID: 26318}
+    - Class: 114
+      Script: {instanceID: 26322}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -228,23 +345,23 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 632}
     - Class: 114
-      Script: {instanceID: 16714}
+      Script: {instanceID: 16718}
     - Class: 114
-      Script: {instanceID: 17952}
+      Script: {instanceID: 17956}
     - Class: 114
-      Script: {instanceID: 18208}
+      Script: {instanceID: 18212}
     - Class: 114
       Script: {instanceID: 21114}
     - Class: 114
-      Script: {instanceID: 21840}
+      Script: {instanceID: 21838}
     - Class: 114
-      Script: {instanceID: 22056}
+      Script: {instanceID: 22054}
     - Class: 114
-      Script: {instanceID: 22464}
+      Script: {instanceID: 22460}
     - Class: 114
-      Script: {instanceID: 23848}
+      Script: {instanceID: 23840}
     - Class: 114
-      Script: {instanceID: 24830}
+      Script: {instanceID: 24816}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -252,6 +369,91 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 19719996
+      Script: {instanceID: 0}
+    - Class: 156049354
+      Script: {instanceID: 0}
+    - Class: 483693784
+      Script: {instanceID: 0}
+    - Class: 1839735485
+      Script: {instanceID: 0}
+    Assets/Scenes/TutorialScene.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 50
+      Script: {instanceID: 0}
+    - Class: 58
+      Script: {instanceID: 0}
+    - Class: 60
+      Script: {instanceID: 0}
+    - Class: 61
+      Script: {instanceID: 0}
+    - Class: 62
+      Script: {instanceID: 0}
+    - Class: 66
+      Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 632}
+    - Class: 114
+      Script: {instanceID: 17956}
+    - Class: 114
+      Script: {instanceID: 18212}
+    - Class: 114
+      Script: {instanceID: 21114}
+    - Class: 114
+      Script: {instanceID: 21838}
+    - Class: 114
+      Script: {instanceID: 22054}
+    - Class: 114
+      Script: {instanceID: 22460}
+    - Class: 114
+      Script: {instanceID: 23840}
+    - Class: 114
+      Script: {instanceID: 24940}
+    - Class: 114
+      Script: {instanceID: 24952}
+    - Class: 114
+      Script: {instanceID: 24956}
+    - Class: 114
+      Script: {instanceID: 24960}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 212
       Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
@@ -576,6 +778,12 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking
     namespaceName: Photon.Pun
     className: PhotonView
+  - hash:
+      serializedVersion: 2
+      Hash: 9c66cd605eaa9b59f8d838c14e99803e
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: PlayerMove
   - hash:
       serializedVersion: 2
       Hash: a4d905db69ca7f45f45458ae380fb66f
@@ -1430,12 +1638,6 @@ ScriptsOnlyBuild:
     className: SpriteLibrarySourceAsset
   - hash:
       serializedVersion: 2
-      Hash: e85e85a8fbb4236ec702fb892fba6fec
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: MainMenu
-  - hash:
-      serializedVersion: 2
       Hash: ebaf7144edff218592123ae94dbc546f
     assemblyName: PhotonUnityNetworking
     namespaceName: Photon.Pun
@@ -1514,12 +1716,62 @@ ScriptsOnlyBuild:
     className: UnityOnSliderValueChangedMessageListener
   - hash:
       serializedVersion: 2
+      Hash: 751e5bae2a317288c2ab58d66687092b
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: ItemControll
+  - hash:
+      serializedVersion: 2
+      Hash: e85e85a8fbb4236ec702fb892fba6fec
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: MainMenu
+  - hash:
+      serializedVersion: 2
       Hash: 9c66cd605eaa9b59f8d838c14e99803e
     assemblyName: Assembly-CSharp
     namespaceName: 
-    className: NewBehaviourScript
+    className: OfflinePlayerMove
+  - hash:
+      serializedVersion: 2
+      Hash: 90faa2d11b9a2a5ba92f6c4f1ed39a07
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: TutorialGameManager
+  - hash:
+      serializedVersion: 2
+      Hash: 676cff817f33c63e21311392bb9d1209
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: UI_InGame
+  - hash:
+      serializedVersion: 2
+      Hash: 80b610dbfce5ffbaaaaad2c9f710f8a1
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: movecamera
+  - hash:
+      serializedVersion: 2
+      Hash: 0ecd73c40672349b3fc5af9f74c1fd15
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: TileMap
+  - hash:
+      serializedVersion: 2
+      Hash: 4d54fa3a0788c4dafd225d93eef0dfe0
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: tile
+  - hash:
+      serializedVersion: 2
+      Hash: c0afc4cb1453f19055e233ff0b2ca77e
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: inputcontroller
   platform: 19
   scenePathNames:
+  - Assets/Scenes/Map Editor.unity
   - Assets/Scenes/MainMenu.unity
   - Assets/Scenes/SampleScene.unity
+  - Assets/Scenes/TutorialScene.unity
   playerPath: C:/Users/MSI/Downloads/GameTest/My project.exe
