@@ -11,9 +11,9 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public enum GameState
 {
-    waiting,
     menu,
     inGame,
+    respawn,
     gameOver
 }
 public class TutorialGameManager : MonoBehaviourPunCallbacks
@@ -26,6 +26,8 @@ public class TutorialGameManager : MonoBehaviourPunCallbacks
     public float time;
     public GameObject[] UI_Pages;
     public GameObject Player;
+    public int PlayerHP = 3;
+
     public void StartGame()
     {
         SetGameState(GameState.inGame);
@@ -52,9 +54,6 @@ public class TutorialGameManager : MonoBehaviourPunCallbacks
     void Start()
     {
         currentGameState = GameState.menu;
-        //Rigidbody2D playerRigidbody2D = Player.GetComponent<Rigidbody2D>();
-        //playerRigidbody2D.constraints = RigidbodyConstraints2D.FreezePosition;
-        //Debug.Log(playerRigidbody2D.constraints.ToString());
     }
 
     // Update is called once per frame
@@ -67,8 +66,8 @@ public class TutorialGameManager : MonoBehaviourPunCallbacks
                 UI_Pages[0].SetActive(true);
                 UI_Pages[1].SetActive(false);
                 UI_Pages[2].SetActive(false);
+                UI_Pages[3].SetActive(false);
 
-                
                 if (Input.GetButtonDown("Jump"))
                     StartGame();
                 break;
@@ -76,13 +75,28 @@ public class TutorialGameManager : MonoBehaviourPunCallbacks
                 UI_Pages[0].SetActive(false);
                 UI_Pages[1].SetActive(true);
                 UI_Pages[2].SetActive(false);
+                UI_Pages[3].SetActive(false);
+
                 time -= Time.deltaTime;
+                if (PlayerHP == 0)
+                    SetGameState(GameState.respawn);
+                if (time < 0)
+                    SetGameState(GameState.gameOver);
+
+                break;
+            case (GameState.respawn):
+                UI_Pages[0].SetActive(false);
+                UI_Pages[1].SetActive(false);
+                UI_Pages[2].SetActive(true);
+                UI_Pages[3].SetActive(false);
                 break;
             case (GameState.gameOver):
                 UI_Pages[0].SetActive(false);
                 UI_Pages[1].SetActive(false);
-                UI_Pages[2].SetActive(true);
+                UI_Pages[2].SetActive(false);
+                UI_Pages[3].SetActive(true);
                 break;
+            
             default:
                 break;
         }

@@ -14,7 +14,6 @@ public class Offline_PlayerMove : MonoBehaviourPun
     Rigidbody2D rigid2D;
     SpriteRenderer spriteRenderer;
     Animator animator;
-    BoxCollider2D boxCollider2D;
 
     RaycastHit2D raycastHit2D;
     RaycastHit2D sideRayHit;
@@ -25,10 +24,11 @@ public class Offline_PlayerMove : MonoBehaviourPun
     public float jumpForce = 9; // Jump 힘
     public float antiGravity = 9.8f;
     private bool jump;
+    private bool isJumping= false;
     private bool isSlope = false;
 
-    private enum State { idle, run, jump, fall, hurt }; // idle은 0, run은 1 이런 식으로 순차적 대응 (enum의 특징)
-    private State state = State.idle; // 시작 상태는 idle(0)이다
+    public enum State { idle, run, jump, fall, hurt }; // idle은 0, run은 1 이런 식으로 순차적 대응 (enum의 특징)
+    public State state = State.idle; // 시작 상태는 idle(0)이다
 
     // Start is called before the first frame update
 
@@ -37,7 +37,6 @@ public class Offline_PlayerMove : MonoBehaviourPun
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        boxCollider2D = GetComponent<BoxCollider2D>();
         rigid2D = GetComponent<Rigidbody2D>();
 
     }
@@ -46,7 +45,7 @@ public class Offline_PlayerMove : MonoBehaviourPun
     void Update()
     { 
         
-        if (GameManager.instance.currentGameState == OnlineGameState.inGame)
+        if (TutorialGameManager.instance.currentGameState == GameState.inGame)
         {
 
             raycastHit2D = Physics2D.Raycast(rigid2D.position, Vector3.down, 0.7f, LayerMask.GetMask("Platform"));
@@ -61,34 +60,37 @@ public class Offline_PlayerMove : MonoBehaviourPun
                     Move();
                     if (HorizontalInput != 0) state = State.run;
                     if (jump)
-                    {
                         state = State.jump;
-                        Jump();
-                    }
                     break;
                 case State.run:
                     HorizontalInput = Input.GetAxisRaw("Horizontal");
                     jump = Input.GetButtonDown("Jump");
                     Move();
                     if (jump)
-                    {
-                        Jump();
                         state = State.jump;
-                    }
                     if (Math.Abs(rigid2D.velocity.x) < 0.3f) state = State.idle;
                     if (rigid2D.velocity.y < -1f && raycastHit2D.collider == null) state = State.fall;
                     break;
                 case State.jump:
                     HorizontalInput = Input.GetAxisRaw("Horizontal");
                     Move();
+                    if (!isJumping)
+                    {
+                        Jump();
+                        isJumping = true;
+                    }
+
                     if (rigid2D.velocity.y < 0.5f ) state = State.fall;
                     break;
                 case State.fall:
+                    isJumping = false;
                     HorizontalInput = Input.GetAxisRaw("Horizontal");
                     Move();
                     if (raycastHit2D.collider != null) state = State.idle;
                     break;
                 case State.hurt:
+                    Debug.Log(state);
+
                     break;
             }
             // Debug.Log(animator.GetInteger("state") != (int)state);

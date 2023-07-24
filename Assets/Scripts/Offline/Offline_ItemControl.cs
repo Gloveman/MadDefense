@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Offline_ItemControl : MonoBehaviour
 {
-    BoxCollider2D BoxCollider2D;
     private Queue<GameObject> ItemList;
     
     // Start is called before the first frame update
@@ -22,7 +21,7 @@ public class Offline_ItemControl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(GameManager.instance.currentGameState == OnlineGameState.inGame)
+        if(TutorialGameManager.instance.currentGameState == GameState.inGame)
         {
             ItemList.Enqueue(collision.gameObject);
         }
