@@ -3,6 +3,7 @@ using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviourPunCallbacks
 {
@@ -23,6 +24,11 @@ public class MainMenu : MonoBehaviourPunCallbacks
     void Update()
     {
 
+    }
+
+    public void OpenTutorial()
+    {
+        SceneManager.LoadScene("TutorialScene");
     }
 
     public void Connect()

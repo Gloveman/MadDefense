@@ -6,7 +6,7 @@ using UnityEngine.Scripting.APIUpdating;
 using Photon.Realtime;
 using Photon.Pun;
 
-public class NewBehaviourScript : MonoBehaviourPun
+public class PlayerMove : MonoBehaviourPun
 {
 
     public static GameObject LocalPlayerInstance=null;
@@ -107,8 +107,6 @@ public class NewBehaviourScript : MonoBehaviourPun
     private void FixedUpdate()
     {
         rigid2D.constraints = RigidbodyConstraints2D.FreezeRotation;
-        
-       
     }
 
     private void Move()

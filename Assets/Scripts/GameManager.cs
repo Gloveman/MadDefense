@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     private void Awake()
     {
         instance = this;
-        NewBehaviourScript.manager = this;
+        PlayerMove.manager = this;
     }
 
     
@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             isparsed = true;
         }
 
-        if (NewBehaviourScript.LocalPlayerInstance == null)
+        if (PlayerMove.LocalPlayerInstance == null)
         {
             PhotonNetwork.Instantiate("Player", new Vector3(0, 4, 0), Quaternion.identity, 0);
             Debug.Log("Added player");
