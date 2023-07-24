@@ -733,6 +733,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f3a1fb486d86244aaec161e440438c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UIPoint: {fileID: 1585128531}
+  UITimer: {fileID: 608551805}
 --- !u!1 &1349225719
 GameObject:
   m_ObjectHideFlags: 0
@@ -1215,7 +1217,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 2060901761}
-  testone: {fileID: 11400000, guid: eb0d7e8d8bb96bd49a75fb8331b4d3ec, type: 2}
+  TileArray:
+  - {fileID: 11400000, guid: eb0d7e8d8bb96bd49a75fb8331b4d3ec, type: 2}
+  - {fileID: 11400000, guid: fce635851b0f57f4887715df99816de2, type: 2}
+  - {fileID: 11400000, guid: ad3b79343e3989640b52eb25c42a0d77, type: 2}
+  - {fileID: 11400000, guid: 829e73affa6bc8042b8d787346dd90b4, type: 2}
   currentGameState: 0
   score: 0
   time: 0

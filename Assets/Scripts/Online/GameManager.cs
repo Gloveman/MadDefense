@@ -8,6 +8,7 @@ using Newtonsoft.Json.Linq;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
+using Unity.VisualScripting;
 
 public enum OnlineGameState
 {
@@ -21,13 +22,13 @@ public class GameManager : MonoBehaviourPunCallbacks
     private bool isparsed = false;
     private bool isloaded = false;
     public Tilemap map;
-    public Tile testone;
     private WebSocket ws;
     private List<Vector3Int> points;
     private List<Tile> tiles;
     private string rawmap;
 
-
+    public Tile[] TileArray;
+    private Vector3 SpawnPoint;
     public static GameManager instance;
     public OnlineGameState currentGameState = OnlineGameState.waiting;
     public int score = 0;
@@ -61,6 +62,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+
         map.ClearAllTiles();
         points = new List<Vector3Int>();
         tiles = new List<Tile>();
@@ -68,24 +70,50 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             ws = new WebSocket("ws://127.0.0.1:5001");
             ws.Connect();
+            var req = new JObject
+            {
+                { "name", "holahola" }
+            };
+            ws.Send(req.ToString());
             ws.OnMessage += delegate (object sender, MessageEventArgs e)
             {
+                Debug.Log("Get map");
                 rawmap = e.Data;
                 var parsed = JObject.Parse(e.Data);
 
                 foreach (JObject item in parsed["data"])
                 {
+                    TileType type = (TileType)int.Parse(item["tile"].ToString());
                     int x = int.Parse(item["points"][0].ToString());
                     int y = int.Parse(item["points"][1].ToString());
-                    points.Add(new Vector3Int(x, y, 0));
+
+                    if (type < TileType.Spawn)
+                    {
+                        tiles.Add(TileArray[(int)type - 1]);
+                        points.Add(new Vector3Int(x, y, 0));
+                    }
+                    else if (type == TileType.Spawn)
+                    {
+                        Debug.Log("Spawn point");
+                        SpawnPoint = new Vector3(x,y,0);
+                    }
+
+                    else
+                    {
+
+                    }
+                    
                 }
 
-                foreach (JObject item in parsed["data"])
+               for(int i=0;i<points.Count;i++)
                 {
-                    tiles.Add(testone);
+                    var pre = points[i];
+                    points[i] = new Vector3Int(pre.x - (int)SpawnPoint.x,(int)SpawnPoint.y-pre.y,0);
                 }
+                SpawnPoint = Vector3.zero;
                 isparsed = true;
 
+                
             };
         }
         else
@@ -96,26 +124,37 @@ public class GameManager : MonoBehaviourPunCallbacks
 
             foreach (JObject item in parsed["data"])
             {
+                TileType type = (TileType)int.Parse(item["tile"].ToString());
                 int x = int.Parse(item["points"][0].ToString());
                 int y = int.Parse(item["points"][1].ToString());
-                points.Add(new Vector3Int(x, y, 0));
-            }
 
-            foreach (JObject item in parsed["data"])
+                if (type < TileType.Spawn)
+                {
+                    tiles.Add(TileArray[(int)type - 1]);
+                    points.Add(new Vector3Int(x, y, 0));
+                }
+                else if (type == TileType.Spawn)
+                {
+
+                    SpawnPoint = new Vector3(x, y, 0);
+                }
+
+                else
+                {
+
+                }
+            }
+            for (int i = 0; i < points.Count; i++)
             {
-                tiles.Add(testone);
+                var pre = points[i];
+                points[i] = new Vector3Int(pre.x - (int)SpawnPoint.x, (int)SpawnPoint.y - pre.y, 0);
             }
+            SpawnPoint = Vector3.zero;
             isparsed = true;
+
         }
 
-        if (PlayerMove.LocalPlayerInstance == null)
-        {
-            Player = PhotonNetwork.Instantiate("Player", new Vector3(0, 4, 0), Quaternion.identity, 0);
-            Debug.Log(Camera.main.GetComponent<CameraMove>().player);
-            Camera.main.GetComponent<CameraMove>().player = Player;
-            Debug.Log(Camera.main.GetComponent<CameraMove>().player);
-            Debug.Log("Added player");
-        }
+
 
 
         currentGameState = OnlineGameState.waiting;
@@ -128,6 +167,14 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             map.SetTiles(points.ToArray(), tiles.ToArray());
             Debug.Log("Loaded map");
+            if (PlayerMove.LocalPlayerInstance == null)
+            {
+                Player = PhotonNetwork.Instantiate("Player", SpawnPoint, Quaternion.identity, 0);
+                Debug.Log(Camera.main.GetComponent<CameraMove>().player);
+                Camera.main.GetComponent<CameraMove>().player = Player;
+                Debug.Log(Camera.main.GetComponent<CameraMove>().player);
+                Debug.Log("Added player");
+            }
             isloaded = true;
             if (PhotonNetwork.IsMasterClient) { 
             Hashtable currentmap = new Hashtable { { "rawmap", rawmap } };

@@ -3122,7 +3122,7 @@ GameObject:
   - component: {fileID: 962461137}
   - component: {fileID: 962461136}
   m_Layer: 5
-  m_Name: Button
+  m_Name: btnSave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3191,7 +3191,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 962461137}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2112278750}
+        m_TargetAssemblyTypeName: TileMap, Assembly-CSharp
+        m_MethodName: Savemap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &962461137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5661,6 +5673,9 @@ MonoBehaviour:
   tilePrefab: {fileID: 6378961790479733202, guid: c519525842a9f7b409d69a10ec839e81, type: 3}
   inputwidth: {fileID: 439623598}
   inputheight: {fileID: 1799818446}
+  inputname: {fileID: 599912237}
+  inputlevel: {fileID: 944417127}
+  inputlimit: {fileID: 590605691}
 --- !u!1 &2130787427
 GameObject:
   m_ObjectHideFlags: 0

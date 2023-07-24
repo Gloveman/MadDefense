@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
+using WebSocketSharp;
 
 public class TileMap : MonoBehaviour
 {
@@ -13,6 +15,15 @@ public class TileMap : MonoBehaviour
     private TMP_InputField inputwidth;
     [SerializeField]
     private TMP_InputField inputheight;
+
+    [SerializeField]
+    private TMP_InputField inputname;
+
+    [SerializeField]
+    private TMP_InputField inputlevel;
+
+    [SerializeField]
+    private TMP_InputField inputlimit;
 
     public int Width { private set; get; } = 30;
     public int Height { private set; get; } = 20;
@@ -52,6 +63,45 @@ public class TileMap : MonoBehaviour
                 SpawnTile(TileType.Empty, pos);
             }
         }
+    }
+
+    public void Savemap()
+    {
+        WebSocket ws=new WebSocket("ws://127.0.0.1:5001");
+        ws.Connect();
+        var json=new JObject();
+        string Filename=inputname.text.ToString();
+        string Timelimit=inputlimit.text.ToString();
+        string level=inputlevel.text.ToString();
+        json.Add("ContentType", "savemap");
+        json.Add("name",Filename);
+        json.Add("time",Timelimit);
+        json.Add("level",level);
+
+        var jarray=new JArray();
+        foreach (Transform t in transform)
+        {
+            if(t.gameObject.GetComponent<tile>().Tiletype!=TileType.Empty)
+            {
+            var elem=new JObject();
+            var point=new JArray();
+
+            int x= (int)Mathf.Floor(t.position.x);
+            int y=(int)Mathf.Floor(t.position.y);
+            point.Add(x); 
+            point.Add(y);
+            elem.Add("points",point);
+
+            int type=(int)t.gameObject.GetComponent<tile>().Tiletype;
+            elem.Add("tile",type);
+
+            jarray.Add(elem);
+            }
+        }
+        json.Add("data",jarray);
+        ws.Send(json.ToString());
+        Debug.Log("Sended");
+        
     }
     void Start()
     {
