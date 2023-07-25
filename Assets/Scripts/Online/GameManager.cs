@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             ws.Connect();
             var req = new JObject
             {
-                { "name", "holahola" }
+                { "name", PhotonNetwork.CurrentRoom.Name }
             };
             ws.Send(req.ToString());
             ws.OnMessage += delegate (object sender, MessageEventArgs e)

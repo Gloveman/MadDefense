@@ -54,7 +54,6 @@ public class inputcontroller : MonoBehaviour
                     }
                         tile.Tiletype = curtype;
                 }
-                Debug.Log(Mathf.Floor(tile.transform.position.x)+","+Mathf.Floor(tile.transform.position.y));
             
             }
         }

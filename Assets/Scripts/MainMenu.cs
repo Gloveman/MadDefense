@@ -5,11 +5,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviourPunCallbacks
+public class MainMenu : MonoBehaviour
 {
-    [SerializeField]
-    bool isConnecting;
-    private byte maxPlayersPerRoom = 2;
     private void Awake()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -31,42 +28,9 @@ public class MainMenu : MonoBehaviourPunCallbacks
         SceneManager.LoadScene("TutorialScene");
     }
 
-    public void Connect()
+    public void OpenOnline()
     {
-        isConnecting = true;
-        if (PhotonNetwork.IsConnected)
-        {
-            PhotonNetwork.JoinRandomRoom();
-        }
-        else
-        {
-            PhotonNetwork.GameVersion = "1";
-            PhotonNetwork.ConnectUsingSettings();
-        }
-
+        SceneManager.LoadScene("MapSelect");
     }
-
-    public override void OnConnectedToMaster()
-    {
-        Debug.Log("Connected to master");
-        Debug.Log(isConnecting);
-        if (isConnecting)
-            PhotonNetwork.JoinRandomRoom();
-    }
-    public override void OnDisconnected(DisconnectCause cause)
-    {
-        Debug.LogWarningFormat("disconnected because of {0}", cause);
-    }
-
-    public override void OnJoinRandomFailed(short returnCode, string message)
-    {
-        Debug.Log("creating new room....");
-        PhotonNetwork.CreateRoom("holahola", new RoomOptions { MaxPlayers = maxPlayersPerRoom });
-    }
-    public override void OnJoinedRoom()
-    {
-        Debug.Log("Room joined");
-        PhotonNetwork.LoadLevel("SampleScene");
-
-    }
+   
 }
