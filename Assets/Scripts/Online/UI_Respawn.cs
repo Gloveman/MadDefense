@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class Offline_GameClear : MonoBehaviour
+public class UI_Respawn : MonoBehaviour
 {
-
+    public TMP_Text Timer;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +14,7 @@ public class Offline_GameClear : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-      
+    { 
+        Timer.text = ((int)GameManager.instance.RespawnTime).ToString();
     }
 }

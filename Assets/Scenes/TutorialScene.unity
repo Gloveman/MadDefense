@@ -1553,6 +1553,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameOver
       objectReference: {fileID: 0}
+    - target: {fileID: 2067477782830204971, guid: 5653b86e5dfd5004ab24d8f766a331af, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1666,6 +1670,10 @@ PrefabInstance:
     - target: {fileID: 4668125830559156, guid: 0358f7e4a57f7f743894c99e6fcbae8b, type: 3}
       propertyPath: m_Name
       value: GameClear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4668125830559156, guid: 0358f7e4a57f7f743894c99e6fcbae8b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2731251250783595621, guid: 0358f7e4a57f7f743894c99e6fcbae8b, type: 3}
       propertyPath: m_Pivot.x
