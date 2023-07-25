@@ -55,9 +55,11 @@ public class Offline_PlayerMove : MonoBehaviourPun
 
             Flip(HorizontalInput);
             if(fallfrom - transform.position.y > 10f) TutorialGameManager.instance.PlayerHP = 0;
+
             switch (state)
             {
                 case State.idle:
+                    isJumping = false;
                     HorizontalInput = Input.GetAxisRaw("Horizontal");
                     jump = Input.GetButtonDown("Jump");
                     fallfrom = transform.position.y;
@@ -67,6 +69,7 @@ public class Offline_PlayerMove : MonoBehaviourPun
                         state = State.jump;
                     break;
                 case State.run:
+                    isJumping = false;
                     HorizontalInput = Input.GetAxisRaw("Horizontal");
                     jump = Input.GetButtonDown("Jump");
                     Move();

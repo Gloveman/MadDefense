@@ -13,9 +13,10 @@ using Unity.VisualScripting;
 public enum OnlineGameState
 {
     waiting,
-    menu,
     inGame,
-    gameOver
+    respawn,
+    gameClear,
+    gameOver,
 }
 
 struct MobInfo
@@ -45,9 +46,12 @@ public class GameManager : MonoBehaviourPunCallbacks
     public static GameManager instance;
     public OnlineGameState currentGameState = OnlineGameState.waiting;
     public int score = 0;
-    public float time;
+    public float time = 300f;
     public GameObject[] UI_Pages;
     public GameObject Player;
+    public int PlayerHP = 3;
+    public float RespawnTime = 0f;
+    public GameObject SkyBG;
 
     public void StartGame()
     {
@@ -79,6 +83,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         map.ClearAllTiles();
         points = new List<Vector3Int>();
         tiles = new List<Tile>();
+        mobs = new List<MobInfo>(); 
         if (PhotonNetwork.IsMasterClient)
         {
             ws = new WebSocket("ws://127.0.0.1:5001");
@@ -120,17 +125,17 @@ public class GameManager : MonoBehaviourPunCallbacks
                     }
                     
                 }
-
-               for(int i=0;i<points.Count;i++)
+                Debug.Log("Updata:" + isparsed + isloaded);
+                for (int i=0;i<points.Count;i++)
                 {
                     var pre = points[i];
                     points[i] = new Vector3Int(pre.x - (int)SpawnPoint.x,(int)SpawnPoint.y-pre.y,0);
                 }
 
-               for(int i=0;i<mobs.Count;i++)
+                for (int i = 0; i < mobs.Count; i++)
                 {
                     var pre = mobs[i];
-                    mobs[i] = new MobInfo(pre.pos.x-SpawnPoint.x,SpawnPoint.y-pre.pos.y,pre.type);
+                    mobs[i] = new MobInfo(pre.pos.x - SpawnPoint.x, SpawnPoint.y - pre.pos.y, pre.type);
                 }
 
 
@@ -143,6 +148,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         else
         {
             Debug.Log("Slave client came");
+            Debug.Log(PhotonNetwork.CurrentRoom.CustomProperties["rawmap"]);
             rawmap = PhotonNetwork.CurrentRoom.CustomProperties["rawmap"].ToString();
             var parsed = JObject.Parse(rawmap);
 
@@ -191,6 +197,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Updata:" + isparsed + isloaded);
         if (isparsed && !isloaded)
         {
             map.SetTiles(points.ToArray(), tiles.ToArray());
@@ -207,10 +214,11 @@ public class GameManager : MonoBehaviourPunCallbacks
 
             if (PlayerMove.LocalPlayerInstance == null)
             {
-                Player = PhotonNetwork.Instantiate("Player", SpawnPoint, Quaternion.identity, 0);
+                Player = PhotonNetwork.Instantiate("Player", new Vector3(SpawnPoint.x +0.5f, SpawnPoint.y + 0.5f, 0) , Quaternion.identity, 0);
                 Debug.Log(Camera.main.GetComponent<CameraMove>().player);
                 Camera.main.GetComponent<CameraMove>().player = Player;
                 Debug.Log(Camera.main.GetComponent<CameraMove>().player);
+                SkyBG.GetComponent<BGScroller>().Player = Player;
                 Debug.Log("Added player");
             }
             isloaded = true;
@@ -221,39 +229,93 @@ public class GameManager : MonoBehaviourPunCallbacks
             }
         }
 
+
+       
         //Debug.Log(currentGameState.ToString());
         switch (currentGameState)
         {
+
             case OnlineGameState.waiting:
                 UI_Pages[0].SetActive(true);
                 UI_Pages[1].SetActive(false);
                 UI_Pages[2].SetActive(false);
                 UI_Pages[3].SetActive(false);
+                UI_Pages[4].SetActive(false);
+                
                 Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount + 1000000000000000);
                 if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
                     StartGame();
                 break;
-            case OnlineGameState.menu:
-                UI_Pages[0].SetActive(false);
-                UI_Pages[1].SetActive(true);
-                UI_Pages[2].SetActive(false);
-                UI_Pages[3].SetActive(false);
-                if (Input.GetButtonDown("Jump"))
-                    StartGame();
-                break;
             case OnlineGameState.inGame:
-                UI_Pages[0].SetActive(false);
-                UI_Pages[1].SetActive(false);
-                UI_Pages[2].SetActive(true);
-                UI_Pages[3].SetActive(false);
+                    UI_Pages[0].SetActive(false);
+                    UI_Pages[1].SetActive(true);
+                    UI_Pages[2].SetActive(false);
+                    UI_Pages[3].SetActive(false);
+                    UI_Pages[4].SetActive(false);
+                    
+                    Debug.Log(PhotonNetwork.IsMasterClient);
+                    if (PhotonNetwork.IsMasterClient)
+                    {
+                        Debug.Log(time);
+                        time -= Time.deltaTime;
+                        Debug.Log(time);
+                        if (isloaded)
+                        {
+                        Hashtable currentmap = new Hashtable { { "timer", time } };
+                        PhotonNetwork.CurrentRoom.SetCustomProperties(currentmap);
+                        }
+                            
+                    }
+                    else
+                    {
+                        time = float.Parse(PhotonNetwork.CurrentRoom.CustomProperties["timer"].ToString());
+                    }
+                    if (PlayerHP == 0)
+                    {
+                        RespawnTime = 5f;
+                        SetOnlineGameState(OnlineGameState.respawn);
+
+                        Player.GetComponent<PolygonCollider2D>().enabled = false;
+                    }
+                    if (time < 0)
+                        SetOnlineGameState(OnlineGameState.gameOver);
                 break;
-            case (OnlineGameState.gameOver):
-                UI_Pages[0].SetActive(false);
-                UI_Pages[1].SetActive(false);
-                UI_Pages[2].SetActive(false);
-                UI_Pages[3].SetActive(true);
-                break;
-            default:
+            case OnlineGameState.respawn:
+                    UI_Pages[0].SetActive(false);
+                    UI_Pages[1].SetActive(false);
+                    UI_Pages[2].SetActive(true);
+                    UI_Pages[3].SetActive(false);
+                    UI_Pages[4].SetActive(false);
+                    RespawnTime -= Time.deltaTime;
+                    time -= Time.deltaTime;
+                    if (RespawnTime < 0)
+                    {
+
+                        Player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                        Player.transform.position = new Vector3(0, 0, 0);
+                        Player.GetComponent<PolygonCollider2D>().enabled = true;
+                        Debug.Log(Player.GetComponent<PolygonCollider2D>().enabled);
+                        PlayerHP = 3;
+                        Screen.brightness = 0.1f;
+                        SetOnlineGameState(OnlineGameState.inGame);
+                    }
+                    break;
+            case (OnlineGameState.gameClear):
+                    UI_Pages[0].SetActive(false);
+                    UI_Pages[1].SetActive(false);
+                    UI_Pages[2].SetActive(false);
+                    UI_Pages[3].SetActive(true);
+                    UI_Pages[4].SetActive(false);
+                    break;
+                case (OnlineGameState.gameOver):
+                    UI_Pages[0].SetActive(false);
+                    UI_Pages[1].SetActive(false);
+                    UI_Pages[2].SetActive(false);
+                    UI_Pages[3].SetActive(false);
+                    UI_Pages[4].SetActive(true);
+                
+                    break;
+                default:
                 break;
         }
     }
@@ -264,14 +326,20 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
 
         }
-        else if(newGameState == OnlineGameState.menu)
-        {
-            
-        }
+        
         else if(newGameState == OnlineGameState.inGame)
         {
 
-        }else if(newGameState == OnlineGameState.gameOver)
+        }
+        else if (newGameState == OnlineGameState.respawn)
+        {
+
+        }
+        else if(newGameState == OnlineGameState.gameClear)
+        {
+
+        }
+        else if (newGameState == OnlineGameState.gameOver)
         {
 
         }

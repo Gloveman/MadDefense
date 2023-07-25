@@ -14,11 +14,12 @@ GameObject:
   - component: {fileID: 5683933328355455830}
   - component: {fileID: 2972955792601835714}
   - component: {fileID: 765851151354667732}
-  - component: {fileID: -4989899054386635637}
-  - component: {fileID: -5696753565395177143}
-  - component: {fileID: -2788883049828580349}
-  - component: {fileID: -4056638517332716142}
-  - component: {fileID: -5087866181803864623}
+  - component: {fileID: 8459419112434327028}
+  - component: {fileID: 6855469814824533402}
+  - component: {fileID: 1123271864871405931}
+  - component: {fileID: 962087711279610539}
+  - component: {fileID: 3884764116383000400}
+  - component: {fileID: 953239740709781500}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -152,7 +153,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.04826784, y: -0.12701721}
+  m_Offset: {x: -0.06486468, y: -0.1270172}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -163,7 +164,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5192282, y: 0.622697}
+  m_Size: {x: 0.5524217, y: 0.622697}
   m_EdgeRadius: 0
 --- !u!95 &2972955792601835714
 Animator:
@@ -236,7 +237,7 @@ PolygonCollider2D:
       - {x: -0.24036312, y: -0.49712768}
       - {x: 0.1510386, y: -0.5023851}
   m_UseDelaunayMesh: 0
---- !u!114 &-4989899054386635637
+--- !u!114 &8459419112434327028
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -251,7 +252,20 @@ MonoBehaviour:
   speed: 5
   jumpForce: 9
   antiGravity: 9.8
---- !u!114 &-5696753565395177143
+  fallfrom: 0
+--- !u!114 &6855469814824533402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127138122361213857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c9641cd1e068bd4b94a542681ccd069, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1123271864871405931
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -270,34 +284,13 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: -2788883049828580349}
-  - {fileID: -4056638517332716142}
-  - {fileID: -5087866181803864623}
+  - {fileID: 962087711279610539}
+  - {fileID: 3884764116383000400}
+  - {fileID: 953239740709781500}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &-2788883049828580349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1127138122361213857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowLayerWeightsInspector: 1
-  ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 3
-    SynchronizeType: 0
-    Name: state
-  m_SynchronizeLayers:
-  - SynchronizeType: 0
-    LayerIndex: 0
---- !u!114 &-4056638517332716142
+--- !u!114 &962087711279610539
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -313,7 +306,7 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
---- !u!114 &-5087866181803864623
+--- !u!114 &3884764116383000400
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -346,3 +339,24 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!114 &953239740709781500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127138122361213857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 3
+    SynchronizeType: 1
+    Name: state
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0

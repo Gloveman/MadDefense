@@ -25,7 +25,11 @@ public class PlayerMove : MonoBehaviourPun
     public float jumpForce = 9; // Jump 힘
     public float antiGravity = 9.8f;
     private bool jump;
+    private bool isJumping = false;
     private bool isSlope = false;
+
+    public float fallfrom;
+
     private enum State { idle, run, jump, fall, hurt }; // idle은 0, run은 1 이런 식으로 순차적 대응 (enum의 특징)
     private State state = State.idle; // 시작 상태는 idle(0)이다
 
@@ -43,7 +47,6 @@ public class PlayerMove : MonoBehaviourPun
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        boxCollider2D = GetComponent<BoxCollider2D>();
         rigid2D = GetComponent<Rigidbody2D>();
 
     }
@@ -65,37 +68,42 @@ public class PlayerMove : MonoBehaviourPun
             if (photonView.IsMine&&HorizontalInput!=0)
                 photonView.RPC("flip",RpcTarget.AllBuffered, HorizontalInput);
 
+            if (fallfrom - transform.position.y > 10f) GameManager.instance.PlayerHP = 0;
             switch (state)
             {
                 case State.idle:
+                    isJumping = false;
                     HorizontalInput = Input.GetAxisRaw("Horizontal");
                     jump = Input.GetButtonDown("Jump");
                     Move();
                     if (HorizontalInput != 0) state = State.run;
                     if (jump)
-                    {
                         state = State.jump;
-                        Jump();
-                    }
                     break;
                 case State.run:
+                    isJumping = false;
                     HorizontalInput = Input.GetAxisRaw("Horizontal");
                     jump = Input.GetButtonDown("Jump");
                     Move();
                     if (jump)
-                    {
-                        Jump();
                         state = State.jump;
-                    }
                     if (Math.Abs(rigid2D.velocity.x) < 0.3f) state = State.idle;
                     if (rigid2D.velocity.y < -1f && raycastHit2D.collider == null) state = State.fall;
                     break;
                 case State.jump:
                     HorizontalInput = Input.GetAxisRaw("Horizontal");
                     Move();
+                    fallfrom = transform.position.y;
+                    if (!isJumping)
+                    {
+                        Jump();
+                        isJumping = true;
+                    }
+
                     if (rigid2D.velocity.y < 0.5f) state = State.fall;
                     break;
                 case State.fall:
+                    isJumping = false;
                     HorizontalInput = Input.GetAxisRaw("Horizontal");
                     Move();
                     if (raycastHit2D.collider != null) state = State.idle;
