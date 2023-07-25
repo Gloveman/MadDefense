@@ -31,27 +31,33 @@ public class Offline_ItemControl : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.tag == "Endpoint")
-        {
-            Debug.Log("in Endpoint " + clearTime.ToString());
-            clearTime += Time.deltaTime;
+        if(TutorialGameManager.instance.currentGameState == GameState.inGame) { 
+            if(collision.tag == "Endpoint")
+            {
+                Debug.Log("in Endpoint " + clearTime.ToString());
+                clearTime += Time.deltaTime;
             
-            if(clearTime > 3)
-            { 
-                TutorialGameManager.instance.currentGameState = GameState.gameOver;
+                if(clearTime > 3)
+                { 
+                    TutorialGameManager.instance.currentGameState = GameState.gameClear;
+                }
             }
         }
+        
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Endpoint")
+        if (TutorialGameManager.instance.currentGameState == GameState.inGame)
         {
-            Debug.Log("Out Endpoint " +  clearTime.ToString());
-            clearTime += Time.deltaTime;
-            if (clearTime > 3)
+            if (collision.tag == "Endpoint")
             {
-                clearTime = 0;
+                Debug.Log("Out Endpoint " + clearTime.ToString());
+                clearTime += Time.deltaTime;
+                if (clearTime > 3)
+                {
+                    clearTime = 0;
 
+                }
             }
         }
     }

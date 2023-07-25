@@ -27,6 +27,8 @@ public class Offline_PlayerMove : MonoBehaviourPun
     private bool isJumping= false;
     private bool isSlope = false;
 
+    public float fallfrom;
+
     public enum State { idle, run, jump, fall, hurt }; // idle은 0, run은 1 이런 식으로 순차적 대응 (enum의 특징)
     public State state = State.idle; // 시작 상태는 idle(0)이다
 
@@ -52,11 +54,13 @@ public class Offline_PlayerMove : MonoBehaviourPun
             getSlope();
 
             Flip(HorizontalInput);
+            if(fallfrom - transform.position.y > 10f) TutorialGameManager.instance.PlayerHP = 0;
             switch (state)
             {
                 case State.idle:
                     HorizontalInput = Input.GetAxisRaw("Horizontal");
                     jump = Input.GetButtonDown("Jump");
+                    fallfrom = transform.position.y;
                     Move();
                     if (HorizontalInput != 0) state = State.run;
                     if (jump)
@@ -66,6 +70,7 @@ public class Offline_PlayerMove : MonoBehaviourPun
                     HorizontalInput = Input.GetAxisRaw("Horizontal");
                     jump = Input.GetButtonDown("Jump");
                     Move();
+                    fallfrom = transform.position.y;
                     if (jump)
                         state = State.jump;
                     if (Math.Abs(rigid2D.velocity.x) < 0.3f) state = State.idle;
@@ -74,6 +79,7 @@ public class Offline_PlayerMove : MonoBehaviourPun
                 case State.jump:
                     HorizontalInput = Input.GetAxisRaw("Horizontal");
                     Move();
+                    fallfrom = transform.position.y;
                     if (!isJumping)
                     {
                         Jump();
