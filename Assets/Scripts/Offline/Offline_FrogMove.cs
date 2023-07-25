@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FrogMove : MonoBehaviour
+public class Offline_FrogMove : MonoBehaviour
 {
     Animator animator;
     SpriteRenderer spriteRenderer;
@@ -48,13 +48,13 @@ public class FrogMove : MonoBehaviour
             //For Online
             //if(Mathf.Min((player[0].transform.position - transform.position).magnitude,(player[1].transform.position - transform.position).magnitude)<4.0f)
             if ((player[0].transform.position - transform.position).magnitude < 4.0f)
-        {
-            float speed = (player[0].transform.position.x - transform.position.x) * Chasingcoeff;
+            {
+                float speed = (player[0].transform.position.x - transform.position.x) * Chasingcoeff;
 
-            spriteRenderer.flipX = (speed > 0) ? true : false;
-            rd.velocity = new Vector2(speed, jumpforce);
-            state= State.jump;
-        }
+                spriteRenderer.flipX = (speed > 0) ? true : false;
+                rd.velocity = new Vector2(speed, jumpforce);
+                state= State.jump;
+            }
 
             timer = 0f;
         }

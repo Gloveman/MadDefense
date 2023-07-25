@@ -17,14 +17,6 @@ public class CameraMove : MonoBehaviour
         if (GameManager.instance.currentGameState == OnlineGameState.inGame)
         {
             this.transform.position = player.transform.position + offset;
-            if (transform.position.y < -4f)
-            {
-                transform.position = new Vector3(transform.position.x, -4f, transform.position.z);
-            }
-            if (transform.position.y > 4f)
-            {
-                transform.position = new Vector3(transform.position.x, 4f, transform.position.z);
-            }
         }
     }
 }

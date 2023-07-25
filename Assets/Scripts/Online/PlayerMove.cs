@@ -30,8 +30,8 @@ public class PlayerMove : MonoBehaviourPun
 
     public float fallfrom;
 
-    private enum State { idle, run, jump, fall, hurt }; // idle은 0, run은 1 이런 식으로 순차적 대응 (enum의 특징)
-    private State state = State.idle; // 시작 상태는 idle(0)이다
+    public enum State { idle, run, jump, fall, hurt }; // idle은 0, run은 1 이런 식으로 순차적 대응 (enum의 특징)
+    public State state = State.idle; // 시작 상태는 idle(0)이다
 
     public static GameManager manager;
     // Start is called before the first frame update

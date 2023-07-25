@@ -876,7 +876,7 @@ namespace Photon.Pun
                     Debug.LogError("DefaultPool failed to load \"" + prefabId + "\". Make sure it's in a \"Resources\" folder. Or use a custom IPunPrefabPool.");
                 }
                 else
-                {
+                {   
                     this.ResourceCache.Add(prefabId, res);
                 }
             }

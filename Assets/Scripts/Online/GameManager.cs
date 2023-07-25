@@ -125,17 +125,18 @@ public class GameManager : MonoBehaviourPunCallbacks
                     }
                     
                 }
-                Debug.Log("Updata:" + isparsed + isloaded);
+
                 for (int i=0;i<points.Count;i++)
                 {
                     var pre = points[i];
-                    points[i] = new Vector3Int(pre.x - (int)SpawnPoint.x,(int)SpawnPoint.y-pre.y,0);
+                    points[i] = new Vector3Int(pre.x - (int)SpawnPoint.x, pre.y - (int)SpawnPoint.y,0);
+                    Debug.Log(SpawnPoint);
                 }
 
                 for (int i = 0; i < mobs.Count; i++)
                 {
                     var pre = mobs[i];
-                    mobs[i] = new MobInfo(pre.pos.x - SpawnPoint.x, SpawnPoint.y - pre.pos.y, pre.type);
+                    mobs[i] = new MobInfo(pre.pos.x - SpawnPoint.x, pre.pos.y - SpawnPoint.y, pre.type);
                 }
 
 
@@ -181,7 +182,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             for (int i = 0; i < points.Count; i++)
             {
                 var pre = points[i];
-                points[i] = new Vector3Int(pre.x - (int)SpawnPoint.x, (int)SpawnPoint.y - pre.y, 0);
+                points[i] = new Vector3Int(pre.x - (int)SpawnPoint.x, pre.y - (int)SpawnPoint.y, 0);
             }
             SpawnPoint = Vector3.zero;
             isparsed = true;
@@ -200,20 +201,21 @@ public class GameManager : MonoBehaviourPunCallbacks
         Debug.Log("Updata:" + isparsed + isloaded);
         if (isparsed && !isloaded)
         {
+            isloaded = true;
             map.SetTiles(points.ToArray(), tiles.ToArray());
             Debug.Log("Loaded map");
 
             if(PhotonNetwork.IsMasterClient)
             {
                 foreach (MobInfo mob in mobs)
-                {
-                    //PhotonNetwork.Instantiate(,) later
-
+                {       
+                    PhotonNetwork.Instantiate(mob.type.ToString(), mob.pos, Quaternion.identity, 0);
                 }
             }
 
             if (PlayerMove.LocalPlayerInstance == null)
             {
+                Debug.Log(SpawnPoint.ToString());
                 Player = PhotonNetwork.Instantiate("Player", new Vector3(SpawnPoint.x +0.5f, SpawnPoint.y + 0.5f, 0) , Quaternion.identity, 0);
                 Debug.Log(Camera.main.GetComponent<CameraMove>().player);
                 Camera.main.GetComponent<CameraMove>().player = Player;
@@ -221,7 +223,7 @@ public class GameManager : MonoBehaviourPunCallbacks
                 SkyBG.GetComponent<BGScroller>().Player = Player;
                 Debug.Log("Added player");
             }
-            isloaded = true;
+            
             if (PhotonNetwork.IsMasterClient) { 
             Hashtable currentmap = new Hashtable { { "rawmap", rawmap } };
             PhotonNetwork.CurrentRoom.SetCustomProperties(currentmap);

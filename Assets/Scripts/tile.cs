@@ -6,7 +6,7 @@ using UnityEngine;
 public enum TileType
 {
     Empty=0, Tile1, Tile2, Tile3, Tile4,
-    Spawn=10, Frog, eagle, opossum,
+    Spawn=10, Frog, Eagle, Opossum,
     End=100
 }
 

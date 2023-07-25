@@ -1,9 +1,10 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ItemControl : MonoBehaviour
+public class ItemControl : MonoBehaviourPun
 {
     private Queue<GameObject> ItemList;
     private float clearTime;
@@ -17,6 +18,8 @@ public class ItemControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!photonView.IsMine && PhotonNetwork.IsConnected)
+            return;
         itemProcess();
     }
 
