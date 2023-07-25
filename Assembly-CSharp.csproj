@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\Online\CameraMove.cs" />
     <Compile Include="Assets\Scripts\inputcontroller.cs" />
     <Compile Include="Assets\Scripts\Online\PlayerMove.cs" />
+    <Compile Include="Assets\Scripts\Offline\Offline_UI_Respawn.cs" />
     <Compile Include="Assets\Scripts\Offline\Offline_UI_InGame.cs" />
     <Compile Include="Assets\Scripts\Online\GameManager.cs" />
     <Compile Include="Assets\Scripts\Offline\Offline_PlayerMove.cs" />
@@ -382,15 +383,6 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Assets\Packages\Newtonsoft.Json.13.0.3\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Android.Types">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.5f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Android.Gradle">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.5f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Gradle.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Android.GradleProject">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.5f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.GradleProject.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.5f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>
