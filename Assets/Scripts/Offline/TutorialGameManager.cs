@@ -27,7 +27,7 @@ public class TutorialGameManager : MonoBehaviourPunCallbacks
     public GameObject[] UI_Pages;
     public GameObject Player;
     public int PlayerHP = 3;
-
+    public float RespawnTime = 0f;
     public void StartGame()
     {
         SetGameState(GameState.inGame);
@@ -79,7 +79,12 @@ public class TutorialGameManager : MonoBehaviourPunCallbacks
 
                 time -= Time.deltaTime;
                 if (PlayerHP == 0)
+                {
+                    RespawnTime = 5f;
                     SetGameState(GameState.respawn);
+                    
+                    Player.GetComponent<PolygonCollider2D>().enabled = false;
+                }
                 if (time < 0)
                     SetGameState(GameState.gameOver);
 
@@ -89,6 +94,18 @@ public class TutorialGameManager : MonoBehaviourPunCallbacks
                 UI_Pages[1].SetActive(false);
                 UI_Pages[2].SetActive(true);
                 UI_Pages[3].SetActive(false);
+                RespawnTime -= Time.deltaTime;
+                if(RespawnTime < 0)
+                {
+
+                    Player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                    Player.transform.position = new Vector3(0, 0, 0);
+                    Player.GetComponent<PolygonCollider2D>().enabled = true;
+                    Debug.Log(Player.GetComponent<PolygonCollider2D>().enabled);
+                    PlayerHP = 3;
+                    Screen.brightness = 0.1f;
+                    SetGameState(GameState.inGame);
+                }
                 break;
             case (GameState.gameOver):
                 UI_Pages[0].SetActive(false);

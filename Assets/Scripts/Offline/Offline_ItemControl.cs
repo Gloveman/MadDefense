@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class Offline_ItemControl : MonoBehaviour
 {
     private Queue<GameObject> ItemList;
-    
+    private float clearTime;
     // Start is called before the first frame update
     void Start()    
     {
@@ -26,6 +27,33 @@ public class Offline_ItemControl : MonoBehaviour
             ItemList.Enqueue(collision.gameObject);
         }
         
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.tag == "Endpoint")
+        {
+            Debug.Log("in Endpoint " + clearTime.ToString());
+            clearTime += Time.deltaTime;
+            
+            if(clearTime > 3)
+            { 
+                TutorialGameManager.instance.currentGameState = GameState.gameOver;
+            }
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Endpoint")
+        {
+            Debug.Log("Out Endpoint " +  clearTime.ToString());
+            clearTime += Time.deltaTime;
+            if (clearTime > 3)
+            {
+                clearTime = 0;
+
+            }
+        }
     }
     private void itemProcess()
     {
@@ -51,6 +79,8 @@ public class Offline_ItemControl : MonoBehaviour
                     }
                     //아이템 사라짐
                     collisionObject.SetActive(false);
+
+
                 }
             }
         }
