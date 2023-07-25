@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Offline\Offline_UI_GameOver.cs" />
     <Compile Include="Assets\Scripts\tile.cs" />
     <Compile Include="Assets\Scripts\Map.cs" />
+    <Compile Include="Assets\Scripts\Offline\FrogMove.cs" />
     <Compile Include="Assets\Scripts\Offline\Offline_UI_GameClear.cs" />
     <Compile Include="Assets\Scripts\Offline\TutorialGameManager.cs" />
     <Compile Include="Assets\Scripts\Offline\Offline_CollisionControl.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Assets\Scripts\TileMap.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Online\UI_InGame.cs" />
+    <Compile Include="Assets\Scripts\opossumwalk.cs" />
     <Compile Include="Assets\Scripts\Offline\Offline_ItemControl.cs" />
     <Compile Include="Assets\Scripts\movecamera.cs" />
     <Compile Include="Assets\Scripts\Offline\Offline_BGScoroller.cs" />
