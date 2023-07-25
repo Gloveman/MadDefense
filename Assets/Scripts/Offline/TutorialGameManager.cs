@@ -14,6 +14,7 @@ public enum GameState
     menu,
     inGame,
     respawn,
+    gameClear,
     gameOver
 }
 public class TutorialGameManager : MonoBehaviourPunCallbacks
@@ -67,7 +68,7 @@ public class TutorialGameManager : MonoBehaviourPunCallbacks
                 UI_Pages[1].SetActive(false);
                 UI_Pages[2].SetActive(false);
                 UI_Pages[3].SetActive(false);
-
+                UI_Pages[4].SetActive(false);
                 if (Input.GetButtonDown("Jump"))
                     StartGame();
                 break;
@@ -76,6 +77,7 @@ public class TutorialGameManager : MonoBehaviourPunCallbacks
                 UI_Pages[1].SetActive(true);
                 UI_Pages[2].SetActive(false);
                 UI_Pages[3].SetActive(false);
+                UI_Pages[4].SetActive(false);
 
                 time -= Time.deltaTime;
                 if (PlayerHP == 0)
@@ -94,8 +96,10 @@ public class TutorialGameManager : MonoBehaviourPunCallbacks
                 UI_Pages[1].SetActive(false);
                 UI_Pages[2].SetActive(true);
                 UI_Pages[3].SetActive(false);
+                UI_Pages[4].SetActive(false);
                 RespawnTime -= Time.deltaTime;
-                if(RespawnTime < 0)
+                time -= Time.deltaTime;
+                if (RespawnTime < 0)
                 {
 
                     Player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
@@ -107,13 +111,20 @@ public class TutorialGameManager : MonoBehaviourPunCallbacks
                     SetGameState(GameState.inGame);
                 }
                 break;
-            case (GameState.gameOver):
+            case (GameState.gameClear):
                 UI_Pages[0].SetActive(false);
                 UI_Pages[1].SetActive(false);
                 UI_Pages[2].SetActive(false);
                 UI_Pages[3].SetActive(true);
+                UI_Pages[4].SetActive(false);
                 break;
-            
+            case (GameState.gameOver):
+                UI_Pages[0].SetActive(false);
+                UI_Pages[1].SetActive(false);
+                UI_Pages[2].SetActive(false);
+                UI_Pages[3].SetActive(false);
+                UI_Pages[4].SetActive(true);
+                break;
             default:
                 break;
         }
