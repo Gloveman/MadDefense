@@ -6,7 +6,7 @@ using UnityEngine;
 public enum TileType
 {
     Empty=0, Tile1, Tile2, Tile3, Tile4,
-    Spawn=10,
+    Spawn=10, Frog, eagle, opossum,
     End=100
 }
 
@@ -15,6 +15,10 @@ public class tile : MonoBehaviour
 {
     [SerializeField]
     private Sprite[] tileimgs;
+
+    [SerializeField]
+    private Sprite[] enemimgs;
+
     [SerializeField]
     private Sprite spawnimg;
     [SerializeField]
@@ -35,6 +39,8 @@ public class tile : MonoBehaviour
             }
             else if ((int)tiletype == (int)TileType.Spawn)
                 spriteRenderer.sprite = spawnimg;
+            else if((int)tiletype < (int)TileType.End)
+                spriteRenderer.sprite = enemimgs[(int)tiletype-(int)TileType.Spawn-1];
             else
                 spriteRenderer.sprite = endimg;
         }

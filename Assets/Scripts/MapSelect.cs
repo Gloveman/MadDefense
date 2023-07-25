@@ -94,7 +94,7 @@ public class MapSelect : MonoBehaviourPunCallbacks
             addbtn.transform.SetParent(Content.transform);
             addbtn.GetComponent<Button>().onClick.AddListener(() => { SceneManager.LoadScene("Map Editor"); });
 
-            Content.GetComponent<RectTransform>().anchoredPosition = new Vector2((mapinfos.Count+1) * 700 - 2260, 0);
+            Content.GetComponent<RectTransform>().anchoredPosition = new Vector2(30+(mapinfos.Count+1) * 730 - 1920, 0);
             isloaded = true;
         }
     }

@@ -17,6 +17,18 @@ public enum OnlineGameState
     inGame,
     gameOver
 }
+
+struct MobInfo
+{
+    public Vector3 pos;
+    public TileType type;
+    public MobInfo(float x, float y, TileType mobtype)
+    {
+        pos = new Vector3(x, y, 0);
+        type = mobtype;
+    }
+}
+
 public class GameManager : MonoBehaviourPunCallbacks
 {
     private bool isparsed = false;
@@ -25,6 +37,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     private WebSocket ws;
     private List<Vector3Int> points;
     private List<Tile> tiles;
+    private List<MobInfo> mobs;
     private string rawmap;
 
     public Tile[] TileArray;
@@ -97,7 +110,10 @@ public class GameManager : MonoBehaviourPunCallbacks
                         Debug.Log("Spawn point");
                         SpawnPoint = new Vector3(x,y,0);
                     }
-
+                    else if (type < TileType.End)
+                    {
+                        mobs.Add(new MobInfo(x, y, type));
+                    }
                     else
                     {
 
@@ -110,6 +126,14 @@ public class GameManager : MonoBehaviourPunCallbacks
                     var pre = points[i];
                     points[i] = new Vector3Int(pre.x - (int)SpawnPoint.x,(int)SpawnPoint.y-pre.y,0);
                 }
+
+               for(int i=0;i<mobs.Count;i++)
+                {
+                    var pre = mobs[i];
+                    mobs[i] = new MobInfo(pre.pos.x-SpawnPoint.x,SpawnPoint.y-pre.pos.y,pre.type);
+                }
+
+
                 SpawnPoint = Vector3.zero;
                 isparsed = true;
 
@@ -139,6 +163,10 @@ public class GameManager : MonoBehaviourPunCallbacks
                     SpawnPoint = new Vector3(x, y, 0);
                 }
 
+                else if(type<TileType.End)
+                {
+                    
+                }
                 else
                 {
 
@@ -167,6 +195,16 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             map.SetTiles(points.ToArray(), tiles.ToArray());
             Debug.Log("Loaded map");
+
+            if(PhotonNetwork.IsMasterClient)
+            {
+                foreach (MobInfo mob in mobs)
+                {
+                    //PhotonNetwork.Instantiate(,) later
+
+                }
+            }
+
             if (PlayerMove.LocalPlayerInstance == null)
             {
                 Player = PhotonNetwork.Instantiate("Player", SpawnPoint, Quaternion.identity, 0);
