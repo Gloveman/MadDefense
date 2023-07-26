@@ -30,6 +30,17 @@ struct MobInfo
     }
 }
 
+struct ItemInfo
+{
+    public Vector3 pos;
+    public TileType type;
+    public ItemInfo(float x, float y, TileType mobtype)
+    {
+        pos = new Vector3(x, y, 0);
+        type = mobtype;
+    }
+}
+
 public class GameManager : MonoBehaviourPunCallbacks
 {
     private bool isparsed = false;
@@ -39,10 +50,12 @@ public class GameManager : MonoBehaviourPunCallbacks
     private List<Vector3Int> points;
     private List<Tile> tiles;
     private List<MobInfo> mobs;
+    private List<ItemInfo> items;
     private string rawmap;
 
     public Tile[] TileArray;
     private Vector3 SpawnPoint;
+    private Vector3 EndPoint;
     public static GameManager instance;
     public OnlineGameState currentGameState = OnlineGameState.waiting;
     public int score = 0;
@@ -57,7 +70,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void StartGame()
     {
         SetOnlineGameState(OnlineGameState.inGame);
-        time = 300f;
+
         if (!PhotonNetwork.IsMasterClient)
         {
             Players[0].GetPhotonView().RPC("StartBGM", RpcTarget.All);
@@ -88,7 +101,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         map.ClearAllTiles();
         points = new List<Vector3Int>();
         tiles = new List<Tile>();
-        mobs = new List<MobInfo>(); 
+        mobs = new List<MobInfo>();
+        items = new List<ItemInfo>();
         if (PhotonNetwork.IsMasterClient)
         {
             ws = new WebSocket("ws://127.0.0.1:5001");
@@ -104,6 +118,10 @@ public class GameManager : MonoBehaviourPunCallbacks
                 rawmap = e.Data;
                 var parsed = JObject.Parse(e.Data);
 
+
+                string timestr = parsed["time"].ToString();
+                string[] splited=timestr.Split(":");
+                time = 60 * float.Parse(splited[0]) + float.Parse(splited[1]);
                 foreach (JObject item in parsed["data"])
                 {
                     TileType type = (TileType)int.Parse(item["tile"].ToString());
@@ -117,16 +135,19 @@ public class GameManager : MonoBehaviourPunCallbacks
                     }
                     else if (type == TileType.Spawn)
                     {
-                        Debug.Log("Spawn point");
                         SpawnPoint = new Vector3(x,y,0);
                     }
-                    else if (type < TileType.End)
+                    else if (type < TileType.Cherry)
                     {
                         mobs.Add(new MobInfo(x, y, type));
                     }
+                    else if (type<TileType.End)
+                    {
+                        items.Add(new ItemInfo(x, y, type));
+                    }
                     else
                     {
-
+                        EndPoint= new Vector3(x, y, 0);
                     }
                     
                 }
@@ -140,8 +161,22 @@ public class GameManager : MonoBehaviourPunCallbacks
 
                 for (int i = 0; i < mobs.Count; i++)
                 {
-                    var pre = mobs[i];
-                    mobs[i] = new MobInfo(pre.pos.x - SpawnPoint.x, pre.pos.y - SpawnPoint.y, pre.type);
+                    if (mobs[i].type != TileType.Opossum)
+                    {
+                        var pre = mobs[i];
+                        mobs[i] = new MobInfo(pre.pos.x - SpawnPoint.x + 0.5f, pre.pos.y - SpawnPoint.y + 0.5f, pre.type);
+                    }
+                    else
+                    {
+                        var pre = mobs[i];
+                        mobs[i] = new MobInfo(pre.pos.x - SpawnPoint.x + 0.5f, pre.pos.y - SpawnPoint.y+0.4f, pre.type);
+                    }
+                }
+
+                for (int i = 0; i < items.Count; i++)
+                {
+                    var pre = items[i];
+                    items[i] = new ItemInfo(pre.pos.x - SpawnPoint.x+0.5f, pre.pos.y - SpawnPoint.y+0.5f, pre.type);
                 }
 
 
@@ -173,15 +208,6 @@ public class GameManager : MonoBehaviourPunCallbacks
                 {
 
                     SpawnPoint = new Vector3(x, y, 0);
-                }
-
-                else if(type<TileType.End)
-                {
-                    
-                }
-                else
-                {
-
                 }
             }
             for (int i = 0; i < points.Count; i++)
@@ -215,6 +241,11 @@ public class GameManager : MonoBehaviourPunCallbacks
                 foreach (MobInfo mob in mobs)
                 {       
                     PhotonNetwork.Instantiate(mob.type.ToString(), mob.pos, Quaternion.identity, 0);
+                }
+
+                foreach(ItemInfo item in items)
+                {
+                    PhotonNetwork.Instantiate(item.type.ToString(), item.pos, Quaternion.identity, 0);
                 }
             }
 

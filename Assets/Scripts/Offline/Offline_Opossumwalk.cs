@@ -16,7 +16,7 @@ public class Offline_Opossumwalk : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         rigid2D.velocity = new Vector2(nextMove * speed, rigid2D.velocity.y);
         Vector2 frontVec = new Vector2(rigid2D.position.x + nextMove * (0.5f + Mathf.Epsilon), rigid2D.position.y);

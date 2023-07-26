@@ -9,34 +9,42 @@ public class Opossumwalk : MonoBehaviourPun
     SpriteRenderer spriteRenderer;
     private float speed = 3;
     private int nextMove = -1;
+    bool isok = false;
     // Start is called before the first frame update
     void Start()
     {
         rigid2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        rigid2D.velocity = new Vector2(nextMove * speed, rigid2D.velocity.y);
-        Vector2 frontVec = new Vector2(rigid2D.position.x + nextMove * (0.5f + Mathf.Epsilon), rigid2D.position.y);
-        Vector2 belowVec = new Vector2(rigid2D.position.x, rigid2D.position.y - 0.3f + Mathf.Epsilon);
-        //ºûÀ¸·Î Platform °¨Áö
-        RaycastHit2D rayHitDown = Physics2D.Raycast(frontVec, Vector2.down, 2, LayerMask.GetMask("Platform"));
-        RaycastHit2D rayHitSide = Physics2D.Raycast(belowVec, new Vector2(rigid2D.velocity.normalized.x, 0), 0.5f, LayerMask.GetMask("Platform"));
-
-        if (rayHitDown.collider == null || rayHitSide.collider != null)
+        if (!PhotonNetwork.IsMasterClient)
         {
-            if(photonView.IsMine)
-                photonView.RPC("flip", RpcTarget.AllBuffered, nextMove);
-            nextMove *= -1;
+            return;
         }
+        Vector2 frontVec = new Vector2(rigid2D.position.x + nextMove * (0.8f + Mathf.Epsilon), rigid2D.position.y);
+        Vector2 belowVec = new Vector2(rigid2D.position.x, rigid2D.position.y - 0.3f + Mathf.Epsilon);
+        Debug.DrawRay(frontVec, Vector2.down, new Color(0, 1, 0));
+        Debug.DrawRay(belowVec, new Vector2(rigid2D.velocity.normalized.x, 0), new Color(1, 0, 0));
+        
+        //ºûÀ¸·Î Platform °¨Áö
+        RaycastHit2D rayHitDown = Physics2D.Raycast(frontVec, Vector2.down, 0.5f, LayerMask.GetMask("Platform"));
+        RaycastHit2D rayHitSide = Physics2D.Raycast(belowVec, new Vector2(nextMove, 0), 0.5f, LayerMask.GetMask("Platform"));
+        Debug.Log(rayHitDown.collider == null || rayHitSide.collider != null);
+         if (rayHitDown.collider == null || rayHitSide.collider != null)
+         {
+            photonView.RPC("flip", RpcTarget.AllBuffered, nextMove);
+            nextMove *= -1;
+
+         }
+        rigid2D.velocity = new Vector2(nextMove * speed, rigid2D.velocity.y);
+
     }
 
     [PunRPC]
-    void flip(float x)
+    void flip(int x)
     {
         spriteRenderer.flipX = x > 0 ? false : true;
 

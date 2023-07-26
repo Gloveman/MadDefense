@@ -88,7 +88,7 @@ public class ItemControl : MonoBehaviourPun
                     {
 
                         Debug.Log(1);
-                        TutorialGameManager.instance.score += 100;
+                        GameManager.instance.score += 100;
                     }
                     //아이템 사라짐
                     collisionObject.SetActive(false);

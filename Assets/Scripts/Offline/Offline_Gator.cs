@@ -2,7 +2,6 @@ using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class Offline_Gator : MonoBehaviour
