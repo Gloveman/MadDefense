@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Online\ItemControl.cs" />
+    <Compile Include="Assets\Scripts\Offline\Offline_Player2.cs" />
     <Compile Include="Assets\Photon\PhotonRealtime\Demos\DemoLoadBalancing\ConnectAndJoinRandomLb.cs" />
     <Compile Include="Assets\Scripts\Offline\Offline_UI_GameOver.cs" />
     <Compile Include="Assets\Scripts\tile.cs" />

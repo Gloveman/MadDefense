@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 8196125631785052006}
   - component: {fileID: 10398695305845428}
   - component: {fileID: 954572405284461787}
-  - component: {fileID: -5242295464065613937}
   - component: {fileID: 5778041180884284577}
   - component: {fileID: -915966722350584798}
   - component: {fileID: 7627518455619288282}
   - component: {fileID: -1260682145753100705}
+  - component: {fileID: 18164964482546345}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -217,23 +217,6 @@ PolygonCollider2D:
       - {x: 0.17980666, y: -0.062025182}
       - {x: 0.057624556, y: 0.15286265}
   m_UseDelaunayMesh: 0
---- !u!114 &-5242295464065613937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3144399070782414196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cf238df36ceba046b3795f43bdbea1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  jumpForce: 9
-  antiGravity: 9.8
-  fallfrom: 0
-  state: 0
 --- !u!114 &5778041180884284577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,7 +248,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3144399070782414196}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e7cb724808c322458aa4d15f5035fa9, type: 3}
   m_Name: 
@@ -281,7 +264,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3144399070782414196}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8efc6b1d64977384eb3405357896c656, type: 3}
   m_Name: 
@@ -328,3 +311,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &18164964482546345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3144399070782414196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0e7aefeae2e107408b4f51c8483eb4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpsound: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
+  speed: 5
+  jumpForce: 9
+  antiGravity: 9.8
+  fallfrom: 0
+  state: 0
