@@ -63,6 +63,7 @@
     <Compile Include="Assets\Photon\PhotonRealtime\Demos\DemoLoadBalancing\ConnectAndJoinRandomLb.cs" />
     <Compile Include="Assets\Scripts\Offline\Offline_UI_GameOver.cs" />
     <Compile Include="Assets\Scripts\tile.cs" />
+    <Compile Include="Assets\Scripts\Online\NewBehaviourScript.cs" />
     <Compile Include="Assets\Scripts\Map.cs" />
     <Compile Include="Assets\Scripts\Offline\Offline_UI_GameClear.cs" />
     <Compile Include="Assets\Scripts\Offline\Offline_Eagle.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Assets\Scripts\Offline\Offline_BGScoroller.cs" />
     <Compile Include="Assets\Scripts\Online\CollisionControl.cs" />
     <Compile Include="Assets\scripts.cs" />
+    <Compile Include="Assets\Scripts\Online\Player2.cs" />
     <Compile Include="Assets\Scripts\Online\CameraMove.cs" />
     <Compile Include="Assets\Scripts\inputcontroller.cs" />
     <Compile Include="Assets\Scripts\Online\PlayerMove.cs" />
