@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public float time = 300f;
     public GameObject[] UI_Pages;
     public GameObject Player;
+    public List<GameObject> Players = new List<GameObject>(0);
     public int PlayerHP = 3;
     public float RespawnTime = 0f;
     public GameObject SkyBG;
@@ -216,7 +217,10 @@ public class GameManager : MonoBehaviourPunCallbacks
             if (PlayerMove.LocalPlayerInstance == null)
             {
                 Debug.Log(SpawnPoint.ToString());
-                Player = PhotonNetwork.Instantiate("Player", new Vector3(SpawnPoint.x +0.5f, SpawnPoint.y + 0.5f, 0) , Quaternion.identity, 0);
+                //if (PhotonNetwork.IsMasterClient)
+                    Player = PhotonNetwork.Instantiate("Player", new Vector3(SpawnPoint.x +0.5f, SpawnPoint.y + 0.5f, 0) , Quaternion.identity, 0);
+                //else
+                //    Player = PhotonNetwork.Instantiate("Player2", new Vector3(SpawnPoint.x + 0.5f, SpawnPoint.y + 0.5f, 0), Quaternion.identity, 0);
                 Debug.Log(Camera.main.GetComponent<CameraMove>().player);
                 Camera.main.GetComponent<CameraMove>().player = Player;
                 Debug.Log(Camera.main.GetComponent<CameraMove>().player);
@@ -347,6 +351,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
         currentGameState = newGameState;
     }
+
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         if (PhotonNetwork.IsMasterClient)

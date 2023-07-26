@@ -34,8 +34,9 @@ public class CollisionControl : MonoBehaviourPun
                 // 플레이어의 발이 대상의 y좌표보다 높을 시 타격으로 인정
                 if (rigid2D.position.y - 0.5f * height > collision.transform.position.y)
                 {
-                    var photonView = collision.gameObject.GetComponent<PhotonView>();
-                    
+                    var enemyPhotonView = collision.gameObject.GetComponent<PhotonView>();
+                    if (enemyPhotonView != null)
+                        enemyPhotonView.RPC("DestroyEnemy", RpcTarget.MasterClient);
                     //이펙트 생성 생성된 이펙트는 자동적으로 destroy됨 (DeathEffect.cs 참고)
                     //Instantiate(Death, new Vector3(collision.transform.position.x, collision.transform.position.y, 0), Death.transform.rotation);
                     //공격할 경우에는 점프를 시켜준다.
@@ -55,7 +56,7 @@ public class CollisionControl : MonoBehaviourPun
 
     void OnDamaged(Vector2 targetPos)
     {
-        TutorialGameManager.instance.PlayerHP -= 1;
+        GameManager.instance.PlayerHP -= 1;
         playerMove.state = PlayerMove.State.hurt;
 
         spriteRenderer.color = new Color(1, 1, 1, 0.4f);

@@ -232,6 +232,8 @@ MonoBehaviour:
   speed: 5
   jumpForce: 9
   antiGravity: 9.8
+  fallfrom: 0
+  state: 0
 --- !u!114 &5778041180884284577
 MonoBehaviour:
   m_ObjectHideFlags: 0

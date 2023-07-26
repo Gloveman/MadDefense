@@ -38,6 +38,7 @@ public class PlayerMove : MonoBehaviourPun
 
     private void Awake()
     {
+        GameManager.instance.Players.Add(gameObject);
         if (photonView.IsMine)
            LocalPlayerInstance = gameObject;
         DontDestroyOnLoad(gameObject);
