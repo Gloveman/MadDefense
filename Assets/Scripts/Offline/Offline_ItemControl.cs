@@ -25,6 +25,7 @@ public class Offline_ItemControl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(11111111111111111);
         if(TutorialGameManager.instance.currentGameState == GameState.inGame)
         {
             if(collision.gameObject.tag=="Item")
@@ -41,7 +42,7 @@ public class Offline_ItemControl : MonoBehaviour
             {
                 Debug.Log("in Endpoint " + clearTime.ToString());
                 clearTime += Time.deltaTime;
-            
+                
                 if(clearTime > 3)
                 { 
                     TutorialGameManager.instance.currentGameState = GameState.gameClear;
@@ -68,6 +69,7 @@ public class Offline_ItemControl : MonoBehaviour
     }
     private void itemProcess()
     {
+        Debug.Log(ItemList.Count);
         for(int i = 0; i < ItemList.Count; i++)
         {
             GameObject collisionObject = ItemList.Dequeue();
@@ -90,8 +92,6 @@ public class Offline_ItemControl : MonoBehaviour
                     }
                     //아이템 사라짐
                     collisionObject.SetActive(false);
-
-
                 }
             }
         }

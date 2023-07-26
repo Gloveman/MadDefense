@@ -7,7 +7,7 @@ using Photon.Realtime;
 using Photon.Pun;
 using Unity.VisualScripting;
 
-public class Offline_PlayerMove : MonoBehaviourPun
+public class Offline_Player2 : MonoBehaviourPun
 {
 
     [SerializeField]
@@ -28,7 +28,7 @@ public class Offline_PlayerMove : MonoBehaviourPun
     public float jumpForce = 9; // Jump Èû
     public float antiGravity = 9.8f;
     private bool jump;
-    private bool isJumping= false;
+    private bool isJumping = false;
     private bool isSlope = false;
 
     public float fallfrom;
@@ -49,8 +49,8 @@ public class Offline_PlayerMove : MonoBehaviourPun
 
     // Update is called once per frame
     void Update()
-    { 
-        
+    {
+
         if (TutorialGameManager.instance.currentGameState == GameState.inGame)
         {
 
@@ -58,7 +58,7 @@ public class Offline_PlayerMove : MonoBehaviourPun
             getSlope();
 
             Flip(HorizontalInput);
-            if(fallfrom - transform.position.y > 10f) TutorialGameManager.instance.PlayerHP = 0;
+            if (fallfrom - transform.position.y > 10f) TutorialGameManager.instance.PlayerHP = 0;
 
             switch (state)
             {
@@ -74,7 +74,7 @@ public class Offline_PlayerMove : MonoBehaviourPun
                         state = State.jump;
                         GetComponent<AudioSource>().PlayOneShot(jumpsound);
                     }
-                        break;
+                    break;
                 case State.run:
                     isJumping = false;
                     HorizontalInput = Input.GetAxisRaw("Horizontal");
@@ -82,10 +82,10 @@ public class Offline_PlayerMove : MonoBehaviourPun
                     Move();
                     fallfrom = transform.position.y;
                     if (jump)
-                    { state = State.jump;
+                    {
+                        state = State.jump;
                         GetComponent<AudioSource>().PlayOneShot(jumpsound);
                     }
-                    if (HorizontalInput == 0) state = State.idle;
                     if (rigid2D.velocity.y < -1f && raycastHit2D.collider == null) state = State.fall;
                     break;
                 case State.jump:
@@ -99,7 +99,7 @@ public class Offline_PlayerMove : MonoBehaviourPun
                         isJumping = true;
                     }
 
-                    if (rigid2D.velocity.y < 0.5f ) state = State.fall;
+                    if (rigid2D.velocity.y < 0.3f && raycastHit2D.collider != null) state = State.idle;
                     break;
                 case State.fall:
                     isJumping = false;
@@ -120,11 +120,11 @@ public class Offline_PlayerMove : MonoBehaviourPun
 
     private void FixedUpdate()
     {
-        
+
         //switch (TutorialGameManager.instance.currentGameState)
         //{
         //    case GameState.inGame:
-                rigid2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+        rigid2D.constraints = RigidbodyConstraints2D.FreezeRotation;
         //break;
         //}
 
