@@ -95,6 +95,7 @@ public class FrogMove : MonoBehaviourPun
         spriteRenderer.flipX = x > 0 ? true : false;
        
     }
+
     [PunRPC]
     public void DestroyEnemy()
     {

@@ -11,6 +11,13 @@ public class CollisionControl : MonoBehaviourPun
     PlayerMove playerMove;
     public float height = 0.5f;
     Queue<GameObject> collisionList;
+
+    [SerializeField]
+    AudioClip hurtsound;
+
+    [SerializeField]
+    AudioClip Destroysound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +43,10 @@ public class CollisionControl : MonoBehaviourPun
                 {
                     var enemyPhotonView = collision.gameObject.GetComponent<PhotonView>();
                     if (enemyPhotonView != null)
+                    {
+                        photonView.RPC("DestroySound", RpcTarget.All);
                         enemyPhotonView.RPC("DestroyEnemy", RpcTarget.MasterClient);
+                    }
                     //이펙트 생성 생성된 이펙트는 자동적으로 destroy됨 (DeathEffect.cs 참고)
                     //Instantiate(Death, new Vector3(collision.transform.position.x, collision.transform.position.y, 0), Death.transform.rotation);
                     //공격할 경우에는 점프를 시켜준다.
@@ -56,6 +66,7 @@ public class CollisionControl : MonoBehaviourPun
 
     void OnDamaged(Vector2 targetPos)
     {
+        photonView.RPC("HurtSound", RpcTarget.All);
         GameManager.instance.PlayerHP -= 1;
         playerMove.state = PlayerMove.State.hurt;
 
@@ -78,5 +89,17 @@ public class CollisionControl : MonoBehaviourPun
         //무적 해제
         gameObject.layer = 9;
         spriteRenderer.color = new Color(1, 1, 1, 1);
+    }
+
+    [PunRPC]
+    void DestroySound()
+    {
+        GetComponent<AudioSource>().PlayOneShot(Destroysound);
+    }
+
+    [PunRPC]
+    void HurtSound()
+    {
+        GetComponent<AudioSource>().PlayOneShot(hurtsound);
     }
 }

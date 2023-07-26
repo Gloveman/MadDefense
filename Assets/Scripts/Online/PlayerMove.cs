@@ -159,6 +159,12 @@ public class PlayerMove : MonoBehaviourPun
             spriteRenderer.flipX = false;
         }
     }
+
+    [PunRPC]
+    void StartBGM()
+    {
+        GameManager.instance.GetComponent<AudioSource>().Play();
+    }
     void getSlope()
     {
         sideRayHit = Physics2D.Raycast(rigid2D.position, Vector2.down, 1, LayerMask.GetMask("Platform"));

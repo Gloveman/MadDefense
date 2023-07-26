@@ -56,10 +56,14 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void StartGame()
     {
-
         SetOnlineGameState(OnlineGameState.inGame);
         time = 300f;
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            Players[0].GetPhotonView().RPC("StartBGM", RpcTarget.All);
+        }
     }
+
 
     public void GameOver()
     {
