@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5558024600306993026}
   - component: {fileID: -7033183593031788819}
   - component: {fileID: 1896862332100045563}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Gator
   m_TagString: Enemy
   m_Icon: {fileID: 0}

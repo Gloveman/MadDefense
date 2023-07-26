@@ -325,7 +325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpsound: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
   speed: 5
-  jumpForce: 9
+  jumpForce: 5
   antiGravity: 9.8
   fallfrom: 0
   state: 0

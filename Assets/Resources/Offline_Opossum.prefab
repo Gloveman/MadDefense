@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6251529767779106602}
   - component: {fileID: 636489431873207693}
   - component: {fileID: 631668349101671123}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Offline_Opossum
   m_TagString: Enemy
   m_Icon: {fileID: 0}

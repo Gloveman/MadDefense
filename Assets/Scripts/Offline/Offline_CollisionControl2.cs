@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class Offline_CollisionControl : MonoBehaviour
+public class Offline_CollisionControl2 : MonoBehaviour
 {
     Rigidbody2D rigid2D;
     SpriteRenderer spriteRenderer;
-    Offline_PlayerMove offline_PlayerMove;
+    Offline_Player2 offline_Player2;
 
     [SerializeField]
     AudioClip hiteffect;
@@ -20,13 +20,13 @@ public class Offline_CollisionControl : MonoBehaviour
     {
         rigid2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        offline_PlayerMove = gameObject.GetComponent<Offline_PlayerMove>();
+        offline_Player2 = gameObject.GetComponent<Offline_Player2>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -41,9 +41,8 @@ public class Offline_CollisionControl : MonoBehaviour
                 //이펙트 생성 생성된 이펙트는 자동적으로 destroy됨 (DeathEffect.cs 참고)
                 //Instantiate(Death, new Vector3(collision.transform.position.x, collision.transform.position.y, 0), Death.transform.rotation);
                 //공격할 경우에는 점프를 시켜준다.
-
-                offline_PlayerMove.Jump();
-                offline_PlayerMove.state = Offline_PlayerMove.State.jump;
+                offline_Player2.state = Offline_Player2.State.jump;
+                offline_Player2.Jump();
             }
             //타격이 아닌 닿음일 경우 피격
             else
@@ -59,7 +58,7 @@ public class Offline_CollisionControl : MonoBehaviour
     {
         GetComponent<AudioSource>().PlayOneShot(hurteffect);
         TutorialGameManager.instance.PlayerHP -= 1;
-        offline_PlayerMove.state = Offline_PlayerMove.State.hurt;
+        offline_Player2.state = Offline_Player2.State.hurt;
 
         gameObject.layer = 10;
         spriteRenderer.color = new Color(1, 1, 1, 0.4f);
@@ -67,13 +66,13 @@ public class Offline_CollisionControl : MonoBehaviour
         rigid2D.velocity = new Vector2(dirc, 1) * 3;
         Invoke("HurtControl", 0.5f);
         //무적시간은 2초
-        Invoke("OffDamaged", 1);
+        Invoke("OffDamaged", 2);
     }
 
     void HurtControl()
     {
         //hurt가 끝나면 상태를 다시 idle로, 버그를 막기 위해서 점프카운트를 초기화 시켜준다 
-        offline_PlayerMove.state = Offline_PlayerMove.State.idle;
+        offline_Player2.state = Offline_Player2.State.idle;
     }
 
     void OffDamaged()

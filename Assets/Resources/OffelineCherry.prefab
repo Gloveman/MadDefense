@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9127034794269385201}
   - component: {fileID: 817546542643676827}
   - component: {fileID: 3726703768300898172}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OffelineCherry
   m_TagString: Item
   m_Icon: {fileID: 0}

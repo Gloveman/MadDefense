@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5348186092288029282}
   - component: {fileID: 8082226596485075008}
   - component: {fileID: -7308233924609519342}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Offline_Frog
   m_TagString: Enemy
   m_Icon: {fileID: 0}

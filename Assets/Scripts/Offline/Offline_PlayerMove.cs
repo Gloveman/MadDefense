@@ -73,6 +73,7 @@ public class Offline_PlayerMove : MonoBehaviourPun
                     {
                         state = State.jump;
                         GetComponent<AudioSource>().PlayOneShot(jumpsound);
+                        Jump();
                     }
                         break;
                 case State.run:
@@ -82,8 +83,9 @@ public class Offline_PlayerMove : MonoBehaviourPun
                     Move();
                     fallfrom = transform.position.y;
                     if (jump)
-                    { state = State.jump;
+                    {   state = State.jump;
                         GetComponent<AudioSource>().PlayOneShot(jumpsound);
+                        Jump();
                     }
                     if (HorizontalInput == 0) state = State.idle;
                     if (rigid2D.velocity.y < -1f && raycastHit2D.collider == null) state = State.fall;
@@ -93,11 +95,6 @@ public class Offline_PlayerMove : MonoBehaviourPun
                     HorizontalInput = Input.GetAxisRaw("Horizontal");
                     Move();
                     fallfrom = transform.position.y;
-                    if (!isJumping)
-                    {
-                        Jump();
-                        isJumping = true;
-                    }
 
                     if (rigid2D.velocity.y < 0.5f ) state = State.fall;
                     break;
@@ -150,7 +147,7 @@ public class Offline_PlayerMove : MonoBehaviourPun
         rigid2D.velocity = new Vector2(HorizontalInput * speed, rigid2D.velocity.y);
     }
 
-    private void Jump()
+    public void Jump()
     {
         rigid2D.velocity = new Vector2(rigid2D.velocity.x, jumpForce);
     }

@@ -34,6 +34,7 @@ public class TutorialGameManager : MonoBehaviourPunCallbacks
         SetGameState(GameState.inGame);
         time = 300f;
         Offline_CameraMove.player = Player;
+        Player.layer = 0;
     }
 
     public void GameOver()
@@ -69,6 +70,7 @@ public class TutorialGameManager : MonoBehaviourPunCallbacks
                 UI_Pages[2].SetActive(false);
                 UI_Pages[3].SetActive(false);
                 UI_Pages[4].SetActive(false);
+                Player.layer = 10;
                 if (Input.GetButtonDown("Jump"))
                     StartGame();
                 break;

@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scripts\Online\UI_InGame.cs" />
     <Compile Include="Assets\Scripts\Offline\Offline_ItemControl.cs" />
     <Compile Include="Assets\Scripts\Online\BGScroller.cs" />
+    <Compile Include="Assets\Scripts\Offline\Offline_CollisionControl2.cs" />
     <Compile Include="Assets\Scripts\movecamera.cs" />
     <Compile Include="Assets\Scripts\Offline\Offline_BGScoroller.cs" />
     <Compile Include="Assets\Scripts\Online\CollisionControl.cs" />

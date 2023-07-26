@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8098100576123719789}
   - component: {fileID: 8880184826763508106}
   - component: {fileID: 1932725705238593030}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OfflineEagle
   m_TagString: Enemy
   m_Icon: {fileID: 0}
