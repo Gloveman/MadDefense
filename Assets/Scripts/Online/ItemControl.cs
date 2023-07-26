@@ -91,9 +91,19 @@ public class ItemControl : MonoBehaviourPun
                         GameManager.instance.score += 100;
                     }
                     //아이템 사라짐
-                    collisionObject.SetActive(false);
+                    //collisionObject.SetActive(false);
+                    photonView.RPC("DestroyItem", RpcTarget.MasterClient,collisionObject.GetPhotonView().ViewID);
                 }
             }
+        }
+    }
+    [PunRPC]
+    public void DestroyItem(int viewid)
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            var itemobj = PhotonView.Find(viewid);
+            PhotonNetwork.Destroy(itemobj);
         }
     }
 }
