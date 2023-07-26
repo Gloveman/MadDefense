@@ -63,6 +63,10 @@ public class MapSelect : MonoBehaviourPunCallbacks
         
     }
 
+    public void Goback()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
     private void Ws_OnMessage(object sender, MessageEventArgs e)
     {
         mapinfos = new List<MapInfo>();

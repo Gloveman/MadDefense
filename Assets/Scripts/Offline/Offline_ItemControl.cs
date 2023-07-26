@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class Offline_ItemControl : MonoBehaviour
 {
+    [SerializeField]
+    AudioClip itemsound;
+
     private Queue<GameObject> ItemList;
     private float clearTime;
     // Start is called before the first frame update
@@ -24,6 +27,8 @@ public class Offline_ItemControl : MonoBehaviour
     {
         if(TutorialGameManager.instance.currentGameState == GameState.inGame)
         {
+            if(collision.gameObject.tag=="Item")
+                GetComponent<AudioSource>().PlayOneShot(itemsound);
             ItemList.Enqueue(collision.gameObject);
         }
         

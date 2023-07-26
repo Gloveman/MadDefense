@@ -195,9 +195,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84bbf8998abbe01419fdd8aa95df144d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpsound: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
   speed: 5
   jumpForce: 5
   antiGravity: 9.8
+  fallfrom: 0
+  state: 0
 --- !u!114 &8825974457786225620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,6 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 015186a27920a5743aaf7ce1ccc7703f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemsound: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
 --- !u!60 &765851151354667732
 PolygonCollider2D:
   m_ObjectHideFlags: 0

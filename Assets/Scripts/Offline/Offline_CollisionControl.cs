@@ -8,6 +8,12 @@ public class Offline_CollisionControl : MonoBehaviour
     Rigidbody2D rigid2D;
     SpriteRenderer spriteRenderer;
     Offline_PlayerMove offline_PlayerMove;
+
+    [SerializeField]
+    AudioClip hiteffect;
+    [SerializeField]
+    AudioClip hurteffect;
+
     public float height = 0.5f;
     // Start is called before the first frame update
     void Start()
@@ -30,6 +36,7 @@ public class Offline_CollisionControl : MonoBehaviour
             // 플레이어의 발이 대상의 y좌표보다 높을 시 타격으로 인정
             if (rigid2D.position.y - 0.5f * height > collision.transform.position.y)
             {
+                GetComponent<AudioSource>().PlayOneShot(hiteffect);
                 collision.gameObject.SetActive(false);
                 //이펙트 생성 생성된 이펙트는 자동적으로 destroy됨 (DeathEffect.cs 참고)
                 //Instantiate(Death, new Vector3(collision.transform.position.x, collision.transform.position.y, 0), Death.transform.rotation);
@@ -48,6 +55,7 @@ public class Offline_CollisionControl : MonoBehaviour
 
     void OnDamaged(Vector2 targetPos)
     {
+        GetComponent<AudioSource>().PlayOneShot(hurteffect);
         TutorialGameManager.instance.PlayerHP -= 1;
         offline_PlayerMove.state = Offline_PlayerMove.State.hurt;
 

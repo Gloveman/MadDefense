@@ -7,6 +7,7 @@ public enum TileType
 {
     Empty=0, Tile1, Tile2, Tile3, Tile4,
     Spawn=10, Frog, Eagle, Opossum,
+    Cherry=20,
     End=100
 }
 
@@ -18,6 +19,9 @@ public class tile : MonoBehaviour
 
     [SerializeField]
     private Sprite[] enemimgs;
+
+    [SerializeField]
+    private Sprite[] itemimgs;
 
     [SerializeField]
     private Sprite spawnimg;
@@ -39,8 +43,10 @@ public class tile : MonoBehaviour
             }
             else if ((int)tiletype == (int)TileType.Spawn)
                 spriteRenderer.sprite = spawnimg;
-            else if((int)tiletype < (int)TileType.End)
+            else if((int)tiletype < (int)TileType.Cherry)
                 spriteRenderer.sprite = enemimgs[(int)tiletype-(int)TileType.Spawn-1];
+            else if ((int)tiletype < (int)TileType.End)
+                spriteRenderer.sprite = itemimgs[(int)tiletype - (int)TileType.Cherry];
             else
                 spriteRenderer.sprite = endimg;
         }

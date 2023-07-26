@@ -10,10 +10,14 @@ using Unity.VisualScripting;
 public class Offline_PlayerMove : MonoBehaviourPun
 {
 
+    [SerializeField]
+    AudioClip jumpsound;
+
     public static GameObject LocalPlayerInstance = null;
     Rigidbody2D rigid2D;
     SpriteRenderer spriteRenderer;
     Animator animator;
+
 
     RaycastHit2D raycastHit2D;
     RaycastHit2D sideRayHit;
@@ -66,8 +70,11 @@ public class Offline_PlayerMove : MonoBehaviourPun
                     Move();
                     if (HorizontalInput != 0) state = State.run;
                     if (jump)
+                    {
                         state = State.jump;
-                    break;
+                        GetComponent<AudioSource>().PlayOneShot(jumpsound);
+                    }
+                        break;
                 case State.run:
                     isJumping = false;
                     HorizontalInput = Input.GetAxisRaw("Horizontal");
@@ -75,11 +82,14 @@ public class Offline_PlayerMove : MonoBehaviourPun
                     Move();
                     fallfrom = transform.position.y;
                     if (jump)
-                        state = State.jump;
+                    { state = State.jump;
+                        GetComponent<AudioSource>().PlayOneShot(jumpsound);
+                    }
                     if (Math.Abs(rigid2D.velocity.x) < 0.3f) state = State.idle;
                     if (rigid2D.velocity.y < -1f && raycastHit2D.collider == null) state = State.fall;
                     break;
                 case State.jump:
+
                     HorizontalInput = Input.GetAxisRaw("Horizontal");
                     Move();
                     fallfrom = transform.position.y;
