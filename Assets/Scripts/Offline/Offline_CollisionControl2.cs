@@ -54,7 +54,7 @@ public class Offline_CollisionControl2 : MonoBehaviour
         }
     }
 
-    void OnDamaged(Vector2 targetPos)
+    public void OnDamaged(Vector2 targetPos)
     {
         GetComponent<AudioSource>().PlayOneShot(hurteffect);
         TutorialGameManager.instance.PlayerHP -= 1;
@@ -66,7 +66,7 @@ public class Offline_CollisionControl2 : MonoBehaviour
         rigid2D.velocity = new Vector2(dirc, 1) * 3;
         Invoke("HurtControl", 0.5f);
         //무적시간은 2초
-        Invoke("OffDamaged", 2);
+        Invoke("OffDamaged", 1);
     }
 
     void HurtControl()

@@ -15,6 +15,8 @@ public class Offline_CollisionControl : MonoBehaviour
     AudioClip hurteffect;
 
     public float height = 0.5f;
+
+    public GameObject EnemyDead;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,7 +43,7 @@ public class Offline_CollisionControl : MonoBehaviour
                 //이펙트 생성 생성된 이펙트는 자동적으로 destroy됨 (DeathEffect.cs 참고)
                 //Instantiate(Death, new Vector3(collision.transform.position.x, collision.transform.position.y, 0), Death.transform.rotation);
                 //공격할 경우에는 점프를 시켜준다.
-
+                Instantiate(EnemyDead, collision.transform.position, new Quaternion());
                 offline_PlayerMove.Jump();
                 offline_PlayerMove.state = Offline_PlayerMove.State.jump;
             }
@@ -55,7 +57,7 @@ public class Offline_CollisionControl : MonoBehaviour
         }
     }
 
-    void OnDamaged(Vector2 targetPos)
+    public void OnDamaged(Vector2 targetPos)
     {
         GetComponent<AudioSource>().PlayOneShot(hurteffect);
         TutorialGameManager.instance.PlayerHP -= 1;

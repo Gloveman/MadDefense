@@ -42,6 +42,11 @@ MonoBehaviour:
   - DestroySound
   - HurtSound
   - StartBGM
+  - ChangeLayer
+  - ChangeSpriteColor
+  - DestroyItem
+  - ItemSound
+  - JumpSound
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
