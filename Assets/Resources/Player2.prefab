@@ -363,9 +363,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Itemsound: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
-  Inventory: 
-  UsableItemSprites: []
-  UsableItems: []
+  Inventory: 0000000000000000
+  UsableItemSprites:
+  - {fileID: 21300000, guid: 962cdc27b8a0296479a28c5e00f830ab, type: 3}
+  - {fileID: 21300000, guid: 962cdc27b8a0296479a28c5e00f830ab, type: 3}
+  UsableItems:
+  - 
+  - BoomUsed
 --- !u!82 &572251732004766444
 AudioSource:
   m_ObjectHideFlags: 0

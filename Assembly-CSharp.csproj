@@ -96,6 +96,7 @@
     <Compile Include="Assets\Scripts\inputcontroller.cs" />
     <Compile Include="Assets\Scripts\Online\Boom.cs" />
     <Compile Include="Assets\Scripts\Online\PlayerMove.cs" />
+    <Compile Include="Assets\Scripts\Online\ItemControl2.cs" />
     <Compile Include="Assets\Scripts\Offline\Offline_UI_Respawn.cs" />
     <Compile Include="Assets\Scripts\Offline\Offline_UI_InGame.cs" />
     <Compile Include="Assets\Scripts\Offline\Offline_FrogMove.cs" />
