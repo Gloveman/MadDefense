@@ -46,4 +46,12 @@ public class Gator : MonoBehaviourPun
     {
         spriteRenderer.flipX = right;
     }
+    public void DestroyEnemy()
+    {
+        Debug.Log("시발 좀 되라");
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.Destroy(this.gameObject);
+        }
+    }
 }

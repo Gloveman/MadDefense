@@ -100,7 +100,6 @@ public class CollisionControl2 : MonoBehaviourPun
             photonView.RPC("ChangeLayer", RpcTarget.All, 0);
 
 
-        spriteRenderer.color = new Color(1, 1, 1, 1);
         if (photonView.IsMine)
             photonView.RPC("ChangeSpriteColor", RpcTarget.All, 1f);
     }
