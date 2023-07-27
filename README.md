@@ -2,6 +2,8 @@
 ## Build your own map&play with others!
 ---
 
+![image](https://github.com/Gloveman/MadDefense/assets/20718582/0c0d1df3-78a8-4830-893b-0c836b523adc)
+
 Week2 4분반 윤현우, 이창우
 
 - 2D 기반 1대1 멀티플레이 플랫포머 게임
@@ -29,6 +31,8 @@ Week2 4분반 윤현우, 이창우
 
 ### 1.Tutorial
 
+![image](https://github.com/Gloveman/MadDefense/assets/20718582/c15f3898-49ba-43b1-b9af-eafbc810eb34)
+![image](https://github.com/Gloveman/MadDefense/assets/20718582/554a0082-4487-4603-b524-87a2133a6b92)
 
 ***Major features***
 - 게임의 조작법과 아이템, 클리어 조건을 확인할 수 있는 튜토리얼 맵
@@ -43,6 +47,8 @@ Week2 4분반 윤현우, 이창우
 ---
 
 ### 2.Map editor
+
+![image](https://github.com/Gloveman/MadDefense/assets/20718582/d1f35346-7930-4806-bff9-27bb7704a5f7)
 
 ***Major features***
 - 원하는 크기로 캔버스를 생성하여 맵을 자유롭게 구성할 수 있습니다.
