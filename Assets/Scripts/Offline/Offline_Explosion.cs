@@ -6,6 +6,7 @@ public class Offline_Explosion : MonoBehaviour
 {
     // Start is called before the first frame update
     float time = 0f;
+
     void Start()
     {
         
@@ -16,6 +17,9 @@ public class Offline_Explosion : MonoBehaviour
     {
         time += Time.deltaTime;
         if (time > 0.13f)
+        {
+
             gameObject.SetActive(false);
+        }
     }
 }

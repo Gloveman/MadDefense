@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Offline_GameClear : MonoBehaviour
 {
@@ -15,5 +16,9 @@ public class Offline_GameClear : MonoBehaviour
     void Update()
     {
       
+    }
+    public void Goback()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }

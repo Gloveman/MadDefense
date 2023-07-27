@@ -12,6 +12,8 @@ public class Offline_PlayerMove : MonoBehaviourPun
 
     [SerializeField]
     AudioClip jumpsound;
+    [SerializeField]
+    AudioClip superjumpsound;
 
     public static GameObject LocalPlayerInstance = null;
     Rigidbody2D rigid2D;
@@ -171,6 +173,13 @@ public class Offline_PlayerMove : MonoBehaviourPun
             perp = Vector2.Perpendicular(sideRayHit.normal).normalized;
         }
         else isSlope = false;
+    }
+
+    public void superjump()
+    {
+        state = State.jump;
+        GetComponent<AudioSource>().PlayOneShot(superjumpsound);
+        rigid2D.velocity = new Vector2(rigid2D.velocity.x, jumpForce*2f);
     }
 }
 

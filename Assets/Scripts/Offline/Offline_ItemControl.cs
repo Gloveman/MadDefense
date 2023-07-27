@@ -9,12 +9,17 @@ public class Offline_ItemControl : MonoBehaviour
     [SerializeField]
     AudioClip itemsound;
 
+    [SerializeField]
+    AudioClip boomsound;
+
     private Queue<GameObject> ItemList;
     private float clearTime;
     private Offline_PlayerMove offline_PlayerMove;
     public int[] Inventory;
     public Sprite[] UsableItemSprites;
     public GameObject[] UsableItems;
+    float timer = 0;
+    bool timer_start = false;
     // Start is called before the first frame update
     void Start()    
     {
@@ -29,20 +34,39 @@ public class Offline_ItemControl : MonoBehaviour
     void Update()
     {
         itemProcess();
-
-        Debug.Log(Input.GetButtonDown("Fire1") + "후후후후후");
+        if (timer>3.1f)
+        {
+            GetComponent<AudioSource>().PlayOneShot(boomsound);
+            timer = 0;
+            timer_start = false;
+        }
+            Debug.Log(Input.GetButtonDown("Fire1") + "후후후후후");
         if (Input.GetButtonDown("Fire1") && (offline_PlayerMove.state != Offline_PlayerMove.State.hurt) && Inventory[0] != 0)
         {
             Debug.Log(999999999999999999);
-            Instantiate(UsableItems[Inventory[0]], transform.position, new Quaternion());
+            if (Inventory[0] == 1)
+            {
+                Instantiate(UsableItems[Inventory[0]], transform.position, new Quaternion());
+                timer_start = true;
+            }
+            else if (Inventory[0] == 2)
+                offline_PlayerMove.superjump();
             Inventory[0] = 0;
         }
         if (Input.GetButtonDown("Fire2") && (offline_PlayerMove.state != Offline_PlayerMove.State.hurt) && Inventory[1] != 0)
         {
             Debug.Log(999999999999999999);
-            Instantiate(UsableItems[Inventory[1]]);
+            if (Inventory[1] == 1)
+            {
+                timer_start = true;
+                Instantiate(UsableItems[Inventory[1]], transform.position, Quaternion.identity);
+            }
+            else if (Inventory[1] == 2)
+                offline_PlayerMove.superjump();
             Inventory[1] = 0;
         }
+        if (timer_start)
+            timer += Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -118,6 +142,13 @@ public class Offline_ItemControl : MonoBehaviour
                             Inventory[0] = 1;
                         else if (Inventory[1] == 0)
                             Inventory[1] = 1;
+                    }
+                    if (collisionObject.name.Contains("spring"))
+                    {
+                        if (Inventory[0] == 0)
+                            Inventory[0] = 2;
+                        else if (Inventory[1] == 0)
+                            Inventory[1] = 2;
                     }
                     collisionObject.SetActive(false);
                 }
