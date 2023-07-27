@@ -623,6 +623,10 @@ MonoBehaviour:
   - {fileID: 352276161}
   - {fileID: 352276160}
   - {fileID: 352276159}
+  InventoryImage:
+  - {fileID: 1250819563}
+  - {fileID: 1250819562}
+  itemControl: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,6 +859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6ad02d8fc431cc4bb281fae664d1daa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isloaded: 0
   p1_basescore: {fileID: 891076820}
   p2_basescore: {fileID: 786270584}
   p1_bonusscore: {fileID: 786270586}
@@ -969,6 +974,8 @@ MonoBehaviour:
   - {fileID: 9104653696726883806}
   - {fileID: 8569533171796989534}
   - {fileID: 7463886632921444780}
+  InventoryImage: []
+  itemControl: {fileID: 0}
 --- !u!1001 &1054705958
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1071,6 +1078,28 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1217222258486961524, guid: 5653b86e5dfd5004ab24d8f766a331af, type: 3}
   m_PrefabInstance: {fileID: 1054705958}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1250819562 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8173308346951511156, guid: ea810256d91675a429015d94728c1382, type: 3}
+  m_PrefabInstance: {fileID: 352276157}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1250819563 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7919574470334328277, guid: ea810256d91675a429015d94728c1382, type: 3}
+  m_PrefabInstance: {fileID: 352276157}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1349225719
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,7 +1283,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 010bbdab657f8b94d9e8e37bc98e892b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreloaded: 0
   map: {fileID: 2060901761}
+  iscleared: 0
   TileArray:
   - {fileID: 11400000, guid: eb0d7e8d8bb96bd49a75fb8331b4d3ec, type: 2}
   - {fileID: 11400000, guid: fce635851b0f57f4887715df99816de2, type: 2}

@@ -195,7 +195,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         else
         {
             Debug.Log("Slave client came");
-            inittime = (float)PhotonNetwork.CurrentRoom.CustomProperties["inittime"];
             rawmap = PhotonNetwork.CurrentRoom.CustomProperties["rawmap"].ToString();
             var parsed = JObject.Parse(rawmap);
 

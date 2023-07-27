@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Online\UI_Respawn.cs" />
     <Compile Include="Assets\Scripts\Online\UI_InGame.cs" />
+    <Compile Include="Assets\Scripts\Online\Gator.cs" />
     <Compile Include="Assets\Scripts\Offline\Offline_Explosion.cs" />
     <Compile Include="Assets\Scripts\Offline\Offline_ItemControl.cs" />
     <Compile Include="Assets\Scripts\Online\BGScroller.cs" />
@@ -86,12 +87,14 @@
     <Compile Include="Assets\Scripts\movecamera.cs" />
     <Compile Include="Assets\Scripts\Online\CollisionControl.cs" />
     <Compile Include="Assets\Scripts\Offline\Offline_BGScoroller.cs" />
+    <Compile Include="Assets\Scripts\Online\EnemyDied.cs" />
     <Compile Include="Assets\scripts.cs" />
     <Compile Include="Assets\Scripts\Online\Eagle.cs" />
     <Compile Include="Assets\Scripts\Online\Player2.cs" />
     <Compile Include="Assets\Scripts\Offline\Offline_EnemyDied.cs" />
     <Compile Include="Assets\Scripts\Online\CameraMove.cs" />
     <Compile Include="Assets\Scripts\inputcontroller.cs" />
+    <Compile Include="Assets\Scripts\Online\Boom.cs" />
     <Compile Include="Assets\Scripts\Online\PlayerMove.cs" />
     <Compile Include="Assets\Scripts\Offline\Offline_UI_Respawn.cs" />
     <Compile Include="Assets\Scripts\Offline\Offline_UI_InGame.cs" />

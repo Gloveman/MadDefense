@@ -10,11 +10,20 @@ public class ItemControl : MonoBehaviourPun
     AudioClip Itemsound;
     private Queue<GameObject> ItemList;
     private float clearTime;
+    public int[] Inventory;
+
+    private PlayerMove PlayerMove;
+    public Sprite[] UsableItemSprites;
+    public string[] UsableItems = new string[]{ "", "BoomUsed" };
     // Start is called before the first frame update
     void Start()
     {
         ItemList = new Queue<GameObject>();
         Debug.Log(ItemList);
+        Inventory = new int[2];
+        Inventory[0] = 0;
+        Inventory[1] = 0;
+        PlayerMove = GameManager.instance.Player.GetComponent<PlayerMove>();
     }
 
     // Update is called once per frame
@@ -23,12 +32,28 @@ public class ItemControl : MonoBehaviourPun
         if (!photonView.IsMine && PhotonNetwork.IsConnected)
             return;
         itemProcess();
+        Debug.Log(Input.GetButtonDown("Fire1") + "후후후후후");
+        if (Input.GetButtonDown("Fire1") && (PlayerMove.state != PlayerMove.State.hurt) && Inventory[0] != 0)
+        {
+            Debug.Log(999999999999999999);
+            Debug.Log(UsableItems[Inventory[0]]);
+            PhotonNetwork.Instantiate(UsableItems[Inventory[0]], transform.position, new Quaternion());
+            Debug.Log(10000000000);
+            Inventory[0] = 0;
+        }
+        if (Input.GetButtonDown("Fire2") && (PlayerMove.state != PlayerMove.State.hurt) && Inventory[1] != 0)
+        {
+            Debug.Log(999999999999999999);
+            PhotonNetwork.Instantiate(UsableItems[Inventory[1]], transform.position, new Quaternion());
+            Inventory[1] = 0;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (GameManager.instance.currentGameState == OnlineGameState.inGame)
         {
+            
             Debug.Log(ItemList);
             ItemList.Enqueue(collision.gameObject);
         }
@@ -100,6 +125,15 @@ public class ItemControl : MonoBehaviourPun
                             photonView.RPC("ItemSound", RpcTarget.All);
                         Debug.Log("Point 4");
                         GameManager.instance.score += 100;
+                    }
+                    if (collisionObject.name.Contains("Boom"))
+                    {
+                        if (photonView.IsMine)
+                            photonView.RPC("ItemSound", RpcTarget.All);
+                        if (Inventory[0] == 0)
+                            Inventory[0] = 1;
+                        else if (Inventory[1] == 0)
+                            Inventory[1] = 1;
                     }
                     //아이템 사라짐
                     //collisionObject.SetActive(false);
