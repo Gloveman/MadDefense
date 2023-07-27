@@ -38,7 +38,7 @@ public class Offline_PlayerMove : MonoBehaviourPun
 
     // Start is called before the first frame update
     
-    List<>
+  
 
     void Start()
     {

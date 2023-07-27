@@ -37,36 +37,42 @@ public class ItemControl : MonoBehaviourPun
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (GameManager.instance.currentGameState == OnlineGameState.inGame)
-        {
-            if (collision.tag == "Endpoint")
-            {
-                Debug.Log("in Endpoint " + clearTime.ToString());
-                clearTime += Time.deltaTime;
 
-                if (clearTime > 3)
+            if (GameManager.instance.currentGameState == OnlineGameState.inGame)
+            {
+                if (collision.tag == "Endpoint")
                 {
-                    GameManager.instance.currentGameState = OnlineGameState.gameClear;
+                    Debug.Log("in Endpoint " + clearTime.ToString());
+                    clearTime += Time.deltaTime;
+
+                    if (clearTime > 3)
+                    {
+                        GameManager.instance.iscleared = true;
+                        photonView.RPC("GameClear", RpcTarget.All);
+                    //GameManager.instance.currentGameState = OnlineGameState.gameClear;
+                }
                 }
             }
-        }
+        
 
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (GameManager.instance.currentGameState == OnlineGameState.inGame)
-        {
-            if (collision.tag == "Endpoint")
-            {
-                Debug.Log("Out Endpoint " + clearTime.ToString());
-                clearTime += Time.deltaTime;
-                if (clearTime > 3)
-                {
-                    clearTime = 0;
 
+            if (GameManager.instance.currentGameState == OnlineGameState.inGame)
+            {
+                if (collision.tag == "Endpoint")
+                {
+                    Debug.Log("Out Endpoint " + clearTime.ToString());
+                    clearTime += Time.deltaTime;
+                    if (clearTime > 3)
+                    {
+                        clearTime = 0;
+
+                    }
                 }
             }
-        }
+        
     }
 
     private void itemProcess()
@@ -118,5 +124,12 @@ public class ItemControl : MonoBehaviourPun
             var itemobj = PhotonView.Find(viewid);
             PhotonNetwork.Destroy(itemobj);
         }
+    }
+
+    [PunRPC]
+    public void GameClear()
+    {
+
+        GameManager.instance.currentGameState = OnlineGameState.gameClear;
     }
 }

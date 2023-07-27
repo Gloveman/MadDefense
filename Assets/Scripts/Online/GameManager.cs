@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviourPunCallbacks
 {
     private bool isparsed = false;
     private bool isloaded = false;
+    public bool scoreloaded = false;
+
     public Tilemap map;
     private WebSocket ws;
     private List<Vector3Int> points;
@@ -53,12 +55,14 @@ public class GameManager : MonoBehaviourPunCallbacks
     private List<ItemInfo> items;
     private string rawmap;
 
+    public bool iscleared=false;
     public Tile[] TileArray;
     private Vector3 SpawnPoint;
     private Vector3 EndPoint;
     public static GameManager instance;
     public OnlineGameState currentGameState = OnlineGameState.waiting;
     public int score = 0;
+    public float inittime = 300f;
     public float time = 300f;
     public GameObject[] UI_Pages;
     public GameObject Player;
@@ -122,7 +126,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
                 string timestr = parsed["time"].ToString();
                 string[] splited=timestr.Split(":");
-                time = 60 * float.Parse(splited[0]) + float.Parse(splited[1]);
+                inittime=time = 60 * float.Parse(splited[0]) + float.Parse(splited[1]);
                 foreach (JObject item in parsed["data"])
                 {
                     TileType type = (TileType)int.Parse(item["tile"].ToString());
@@ -180,7 +184,8 @@ public class GameManager : MonoBehaviourPunCallbacks
                     items[i] = new ItemInfo(pre.pos.x - SpawnPoint.x+0.5f, pre.pos.y - SpawnPoint.y+0.5f, pre.type);
                 }
 
-
+                EndPoint-= SpawnPoint;
+                EndPoint += new Vector3(0.5f, 1.83f,1f);
                 SpawnPoint = Vector3.zero;
                 isparsed = true;
 
@@ -190,7 +195,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         else
         {
             Debug.Log("Slave client came");
-            Debug.Log(PhotonNetwork.CurrentRoom.CustomProperties["rawmap"]);
+            inittime = (float)PhotonNetwork.CurrentRoom.CustomProperties["inittime"];
             rawmap = PhotonNetwork.CurrentRoom.CustomProperties["rawmap"].ToString();
             var parsed = JObject.Parse(rawmap);
 
@@ -248,6 +253,7 @@ public class GameManager : MonoBehaviourPunCallbacks
                 {
                     PhotonNetwork.Instantiate(item.type.ToString(), item.pos, Quaternion.identity, 0);
                 }
+                PhotonNetwork.Instantiate("Endpoint", EndPoint, Quaternion.identity, 0);
             }
 
             if (PlayerMove.LocalPlayerInstance == null)
@@ -265,7 +271,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             }
             
             if (PhotonNetwork.IsMasterClient) { 
-            Hashtable currentmap = new Hashtable { { "rawmap", rawmap } };
+            Hashtable currentmap = new Hashtable { { "rawmap", rawmap },{ "inittime",inittime} };
             PhotonNetwork.CurrentRoom.SetCustomProperties(currentmap);
             Debug.Log("property updated");
             }
@@ -356,9 +362,25 @@ public class GameManager : MonoBehaviourPunCallbacks
                     UI_Pages[3].SetActive(false);
                     UI_Pages[4].SetActive(true);
                 
-                    break;
+                    break; 
                 default:
                 break;
+        }
+
+        if(currentGameState==OnlineGameState.gameClear)
+        {
+            if (PhotonNetwork.IsMasterClient)
+                Player.GetPhotonView().RPC("p1score", RpcTarget.All, score);
+            else
+                Player.GetPhotonView().RPC("p2score", RpcTarget.All, score);
+            if (PhotonNetwork.IsMasterClient)
+            {
+               int bonusscore = (int)(inittime - time) * 5;
+                Player.GetPhotonView().RPC("bonusscore", RpcTarget.All, bonusscore);
+            }
+
+        
+
         }
     }
 

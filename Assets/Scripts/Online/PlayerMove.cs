@@ -6,6 +6,8 @@ using UnityEngine.Scripting.APIUpdating;
 using Photon.Realtime;
 using Photon.Pun;
 using Unity.VisualScripting;
+using UnityEngine.SocialPlatforms.Impl;
+using JetBrains.Annotations;
 
 public class PlayerMove : MonoBehaviourPun
 {
@@ -187,6 +189,44 @@ public class PlayerMove : MonoBehaviourPun
     void JumpSound()
     {
         GetComponent<AudioSource>().PlayOneShot(jumpsound);
+    }
+
+    [PunRPC]
+    void p1score(int score)
+    {
+        GameManager.instance.UI_Pages[3].GetComponent<UI_GameClear>().p1_basescore.text = score.ToString();
+    }
+
+    [PunRPC]
+    void bonusscore(int bonusscore)
+    {
+        if (GameManager.instance.iscleared)
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                GameManager.instance.UI_Pages[3].GetComponent<UI_GameClear>().p1_bonusscore.text = bonusscore.ToString();
+                GameManager.instance.UI_Pages[3].GetComponent<UI_GameClear>().p2_bonusscore.text = "0000";
+            }
+            else
+            {
+                GameManager.instance.UI_Pages[3].GetComponent<UI_GameClear>().p1_bonusscore.text = "0000";
+                GameManager.instance.UI_Pages[3].GetComponent<UI_GameClear>().p2_bonusscore.text = bonusscore.ToString();
+            }
+        }
+        else
+        {
+            if (!PhotonNetwork.IsMasterClient)
+            {
+                GameManager.instance.UI_Pages[3].GetComponent<UI_GameClear>().p1_bonusscore.text = bonusscore.ToString();
+                GameManager.instance.UI_Pages[3].GetComponent<UI_GameClear>().p2_bonusscore.text = "0000";
+            }
+            else
+            {
+                GameManager.instance.UI_Pages[3].GetComponent<UI_GameClear>().p1_bonusscore.text = "0000";
+                GameManager.instance.UI_Pages[3].GetComponent<UI_GameClear>().p2_bonusscore.text = bonusscore.ToString();
+            }
+        }
+        GameManager.instance.scoreloaded = true;
     }
 
 }

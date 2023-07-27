@@ -188,5 +188,11 @@ public class Player2 : MonoBehaviourPun
     {
         GetComponent<AudioSource>().PlayOneShot(jumpsound);
     }
+
+    [PunRPC]
+    void p2score(int score)
+    {
+        GameManager.instance.UI_Pages[3].GetComponent<UI_GameClear>().p2_basescore.text = score.ToString();
+    }
 }
 
