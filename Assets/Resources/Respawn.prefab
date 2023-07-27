@@ -555,6 +555,10 @@ MonoBehaviour:
   - {fileID: 9104653696075465592}
   - {fileID: 8569533171098323192}
   - {fileID: 7463886632782753546}
+  InventoryImage:
+  - {fileID: 0}
+  - {fileID: 0}
+  itemControl: {fileID: 0}
 --- !u!1 &6419105291878227098
 GameObject:
   m_ObjectHideFlags: 0

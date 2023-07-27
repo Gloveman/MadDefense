@@ -14,11 +14,14 @@ public class Offline_UI_InGame : MonoBehaviour
     Sprite Heart;
     Sprite EmptyHeart;
     
+    public Image[] InventoryImage;
+    public Offline_ItemControl itemControl;
     // Start is called before the first frame update
     void Start()
     {
         Heart = Resources.Load<Sprite>("Heart");
         EmptyHeart = Resources.Load<Sprite>("EmptyHeart");
+        itemControl = TutorialGameManager.instance.Player.GetComponent<Offline_ItemControl>();
     }
 
     // Update is called once per frame
@@ -36,5 +39,8 @@ public class Offline_UI_InGame : MonoBehaviour
             UIHeart[i].sprite = Heart;
         for (int i = HP; i < 3; i++)
             UIHeart[i].sprite = EmptyHeart;
+
+        InventoryImage[0].sprite = itemControl.Inventory[0] == 0 ? null : itemControl.UsableItemSprites[itemControl.Inventory[0]];
+        InventoryImage[1].sprite = itemControl.Inventory[1] == 0 ? null : itemControl.UsableItemSprites[itemControl.Inventory[1]];
     }
 }

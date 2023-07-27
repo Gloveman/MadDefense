@@ -23,9 +23,9 @@ public class Offline_PlayerMove : MonoBehaviourPun
     RaycastHit2D sideRayHit;
     Vector2 perp;
 
-    public float speed = 5; // player ¼Ó·Â
-    private float HorizontalInput = 0; // ¼öÆò ÀÔ·Â
-    public float jumpForce = 9; // Jump Èû
+    public float speed = 5; // player ï¿½Ó·ï¿½
+    private float HorizontalInput = 0; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½
+    public float jumpForce = 9; // Jump ï¿½ï¿½
     public float antiGravity = 9.8f;
     private bool jump;
     private bool isJumping= false;
@@ -33,19 +33,17 @@ public class Offline_PlayerMove : MonoBehaviourPun
 
     public float fallfrom;
 
-    public enum State { idle, run, jump, fall, hurt }; // idleÀº 0, runÀº 1 ÀÌ·± ½ÄÀ¸·Î ¼øÂ÷Àû ´ëÀÀ (enumÀÇ Æ¯Â¡)
-    public State state = State.idle; // ½ÃÀÛ »óÅÂ´Â idle(0)ÀÌ´Ù
+    public enum State { idle, run, jump, fall, hurt }; // idleï¿½ï¿½ 0, runï¿½ï¿½ 1 ï¿½Ì·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (enumï¿½ï¿½ Æ¯Â¡)
+    public State state = State.idle; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â´ï¿½ idle(0)ï¿½Ì´ï¿½
 
     // Start is called before the first frame update
-    
-  
+
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         rigid2D = GetComponent<Rigidbody2D>();
-
     }
 
     // Update is called once per frame
