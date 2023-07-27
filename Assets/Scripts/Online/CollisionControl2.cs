@@ -74,13 +74,13 @@ public class CollisionControl2 : MonoBehaviourPun
         if (photonView.IsMine)
             photonView.RPC("ChangeLayer", RpcTarget.All, 10);
         spriteRenderer.color = new Color(1, 1, 1, 0.4f);
-        //if (photonView.IsMine)
-        //    photonView.RPC("ChangeSpriteColor", RpcTarget.All, new Color(1,1,1,0.4f));
+        if (photonView.IsMine)
+            photonView.RPC("ChangeSpriteColor", RpcTarget.All, 0.4f);
         int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
         rigid2D.velocity = new Vector2(dirc, 1) * 3;
         Invoke("HurtControl", 0.5f);
         //무적시간은 2초
-        Invoke("OffDamaged", 2);
+        Invoke("OffDamaged", 1.5f);
     }
 
     void HurtControl()
@@ -98,8 +98,8 @@ public class CollisionControl2 : MonoBehaviourPun
 
 
         spriteRenderer.color = new Color(1, 1, 1, 1);
-        //if (photonView.IsMine)
-        //    photonView.RPC("ChangeSpriteColor", RpcTarget.All, new Color(1, 1, 1, 1));
+        if (photonView.IsMine)
+            photonView.RPC("ChangeSpriteColor", RpcTarget.All, 1f);
     }
 
     [PunRPC]
@@ -118,9 +118,9 @@ public class CollisionControl2 : MonoBehaviourPun
     {
         gameObject.layer = layer;
     }
-    [PunRPC] 
-    public void ChangeSpriteColor(Color color)
+    [PunRPC]
+    public void ChangeSpriteColor(float alpha)
     {
-        spriteRenderer.color = color;
+        spriteRenderer.color = new Color(1, 1, 1, alpha);
     }
 }

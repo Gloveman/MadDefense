@@ -37,7 +37,8 @@ public class Offline_PlayerMove : MonoBehaviourPun
     public State state = State.idle; // 시작 상태는 idle(0)이다
 
     // Start is called before the first frame update
-
+    
+    List<>
 
     void Start()
     {
