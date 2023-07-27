@@ -19,6 +19,8 @@ public class CollisionControl2 : MonoBehaviourPun
     AudioClip Destroysound;
 
     // Start is called before the first frame update
+    public GameObject EnemyDead;
+
     void Start()
     {
         rigid2D = GetComponent<Rigidbody2D>();
@@ -46,6 +48,7 @@ public class CollisionControl2 : MonoBehaviourPun
                     {
                         photonView.RPC("DestroySound", RpcTarget.All);
                         enemyPhotonView.RPC("DestroyEnemy", RpcTarget.MasterClient);
+                        PhotonNetwork.Instantiate("EnemyDead", collision.gameObject.transform.position, new Quaternion());
                     }
                     //이펙트 생성 생성된 이펙트는 자동적으로 destroy됨 (DeathEffect.cs 참고)
                     //Instantiate(Death, new Vector3(collision.transform.position.x, collision.transform.position.y, 0), Death.transform.rotation);
@@ -65,7 +68,7 @@ public class CollisionControl2 : MonoBehaviourPun
         //피격상태 설정
     }
 
-    void OnDamaged(Vector2 targetPos)
+    public void OnDamaged(Vector2 targetPos)
     {
         photonView.RPC("HurtSound", RpcTarget.All);
         GameManager.instance.PlayerHP -= 1;

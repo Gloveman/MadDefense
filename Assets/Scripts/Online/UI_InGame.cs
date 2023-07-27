@@ -12,11 +12,15 @@ public class UI_InGame : MonoBehaviour
     public Image[] UIHeart;
     Sprite Heart;
     Sprite EmptyHeart;
+
+    public Image[] InventoryImage;
+    public ItemControl itemControl;
     // Start is called before the first frame update
     void Start()
     {
         Heart = Resources.Load<Sprite>("Heart");
         EmptyHeart = Resources.Load<Sprite>("EmptyHeart");
+        itemControl = GameManager.instance.Player.GetComponent<ItemControl>();
     }
 
     // Update is called once per frame
@@ -32,5 +36,9 @@ public class UI_InGame : MonoBehaviour
             UIHeart[i].sprite = Heart;
         for (int i = HP; i < 3; i++)
             UIHeart[i].sprite = EmptyHeart;
+
+        Debug.Log(itemControl.Inventory[0] + "조조노ㅗ노조노노");
+        InventoryImage[0].sprite = itemControl.Inventory[0] == 0 ? null : itemControl.UsableItemSprites[itemControl.Inventory[0]];
+        InventoryImage[1].sprite = itemControl.Inventory[1] == 0 ? null : itemControl.UsableItemSprites[itemControl.Inventory[1]];
     }
 }

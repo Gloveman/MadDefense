@@ -349,6 +349,7 @@ MonoBehaviour:
   height: 0.5
   hurtsound: {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
   Destroysound: {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}
+  EnemyDead: {fileID: 0}
 --- !u!114 &-8774628148908122722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,6 +363,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Itemsound: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
+  Inventory: 
+  UsableItemSprites: []
+  UsableItems: []
 --- !u!82 &572251732004766444
 AudioSource:
   m_ObjectHideFlags: 0
