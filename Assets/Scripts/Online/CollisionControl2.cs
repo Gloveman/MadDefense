@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class CollisionControl : MonoBehaviourPun
+public class CollisionControl2 : MonoBehaviourPun
 {
     Rigidbody2D rigid2D;
     SpriteRenderer spriteRenderer;
-    PlayerMove playerMove;
+    Player2 player2;
     public float height = 0.5f;
     Queue<GameObject> collisionList;
 
@@ -23,14 +23,14 @@ public class CollisionControl : MonoBehaviourPun
     {
         rigid2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        playerMove = gameObject.GetComponent<PlayerMove>();
+        player2 = gameObject.GetComponent<Player2>();
         collisionList = new Queue<GameObject>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -46,13 +46,12 @@ public class CollisionControl : MonoBehaviourPun
                     {
                         photonView.RPC("DestroySound", RpcTarget.All);
                         enemyPhotonView.RPC("DestroyEnemy", RpcTarget.MasterClient);
-                        Debug.Log("Point 1");
                     }
                     //이펙트 생성 생성된 이펙트는 자동적으로 destroy됨 (DeathEffect.cs 참고)
                     //Instantiate(Death, new Vector3(collision.transform.position.x, collision.transform.position.y, 0), Death.transform.rotation);
                     //공격할 경우에는 점프를 시켜준다.
-                    playerMove.state = PlayerMove.State.jump;
-                    playerMove.Jump();
+                    player2.state = Player2.State.jump;
+                    player2.Jump();
                 }
                 //타격이 아닌 닿음일 경우 피격
                 else
@@ -70,35 +69,37 @@ public class CollisionControl : MonoBehaviourPun
     {
         photonView.RPC("HurtSound", RpcTarget.All);
         GameManager.instance.PlayerHP -= 1;
-        playerMove.state = PlayerMove.State.hurt;
+        player2.state = Player2.State.hurt;
 
         if (photonView.IsMine)
             photonView.RPC("ChangeLayer", RpcTarget.All, 10);
-        if (photonView.IsMine)
-            photonView.RPC("ChangeSpriteColor", RpcTarget.All, 0.4f);
-
-        //spriteRenderer.color = new Color(1, 1, 1, 0.4f);
+        spriteRenderer.color = new Color(1, 1, 1, 0.4f);
+        //if (photonView.IsMine)
+        //    photonView.RPC("ChangeSpriteColor", RpcTarget.All, new Color(1,1,1,0.4f));
         int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
         rigid2D.velocity = new Vector2(dirc, 1) * 3;
         Invoke("HurtControl", 0.5f);
         //무적시간은 2초
-        Invoke("OffDamaged", 1.5f);
+        Invoke("OffDamaged", 2);
     }
 
     void HurtControl()
     {
         //hurt가 끝나면 상태를 다시 idle로, 버그를 막기 위해서 점프카운트를 초기화 시켜준다 
-        playerMove.state = PlayerMove.State.idle;
+        player2.state = Player2.State.idle;
     }
 
     void OffDamaged()
     {
         //무적 해제
+
         if (photonView.IsMine)
             photonView.RPC("ChangeLayer", RpcTarget.All, 0);
-        if (photonView.IsMine)
-            photonView.RPC("ChangeSpriteColor", RpcTarget.All, 1f);
-       // spriteRenderer.color = new Color(1, 1, 1, 1);
+
+
+        spriteRenderer.color = new Color(1, 1, 1, 1);
+        //if (photonView.IsMine)
+        //    photonView.RPC("ChangeSpriteColor", RpcTarget.All, new Color(1, 1, 1, 1));
     }
 
     [PunRPC]
@@ -117,9 +118,9 @@ public class CollisionControl : MonoBehaviourPun
     {
         gameObject.layer = layer;
     }
-    [PunRPC]
-    public void ChangeSpriteColor(float alpha)
+    [PunRPC] 
+    public void ChangeSpriteColor(Color color)
     {
-        spriteRenderer.color = new Color(1,1,1,alpha);
+        spriteRenderer.color = color;
     }
 }

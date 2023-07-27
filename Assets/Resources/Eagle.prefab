@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: -8149687073526747405}
   - component: {fileID: 1978583436942116779}
   - component: {fileID: 3902283213735356025}
+  - component: {fileID: 6444681506633972709}
   m_Layer: 8
   m_Name: Eagle
   m_TagString: Enemy
@@ -305,3 +306,16 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+--- !u!114 &6444681506633972709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3792134883585604890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54557c63e5dc65649849506c3a0259a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2

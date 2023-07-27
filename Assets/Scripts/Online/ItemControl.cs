@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class ItemControl : MonoBehaviourPun
 {
+    [SerializeField]
+    AudioClip Itemsound;
     private Queue<GameObject> ItemList;
     private float clearTime;
     // Start is called before the first frame update
@@ -71,9 +73,11 @@ public class ItemControl : MonoBehaviourPun
     {
         for (int i = 0; i < ItemList.Count; i++)
         {
+            Debug.Log("Point 1");
             GameObject collisionObject = ItemList.Dequeue();
-            if (!collisionObject.activeSelf)
+            if (collisionObject.IsDestroyed())
             {
+                Debug.Log("Point 2");
                 continue;
             }
             else
@@ -81,13 +85,14 @@ public class ItemControl : MonoBehaviourPun
                 if (collisionObject.tag == "Item")
                 {
 
-                    Debug.Log(2);
+                    Debug.Log("Point 3");
                     //점수
                     bool isCherry = collisionObject.name.Contains("Cherry");
                     if (isCherry)
                     {
-
-                        Debug.Log(1);
+                        if (photonView.IsMine)
+                            photonView.RPC("ItemSound", RpcTarget.All);
+                        Debug.Log("Point 4");
                         GameManager.instance.score += 100;
                     }
                     //아이템 사라짐
@@ -97,6 +102,14 @@ public class ItemControl : MonoBehaviourPun
             }
         }
     }
+
+    [PunRPC]
+    void ItemSound()
+    {
+        GetComponent<AudioSource>().PlayOneShot(Itemsound);
+    }
+
+
     [PunRPC]
     public void DestroyItem(int viewid)
     {

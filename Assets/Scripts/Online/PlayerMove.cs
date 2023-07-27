@@ -10,6 +10,9 @@ using Unity.VisualScripting;
 public class PlayerMove : MonoBehaviourPun
 {
 
+    [SerializeField]
+    AudioClip jumpsound;
+
     public static GameObject LocalPlayerInstance=null;
     Rigidbody2D rigid2D;
     SpriteRenderer spriteRenderer;
@@ -79,7 +82,12 @@ public class PlayerMove : MonoBehaviourPun
                     Move();
                     if (HorizontalInput != 0) state = State.run;
                     if (jump)
+                    {
                         state = State.jump;
+                        Jump();
+                        if (photonView.IsMine)
+                            photonView.RPC("JumpSound", RpcTarget.All);
+                    }
                     break;
                 case State.run:
                     isJumping = false;
@@ -87,7 +95,12 @@ public class PlayerMove : MonoBehaviourPun
                     jump = Input.GetButtonDown("Jump");
                     Move();
                     if (jump)
+                    {
                         state = State.jump;
+                        if (photonView.IsMine)
+                            photonView.RPC("JumpSound", RpcTarget.All);
+                        Jump();
+                    }
                     if (Math.Abs(rigid2D.velocity.x) < 0.3f) state = State.idle;
                     if (rigid2D.velocity.y < -1f && raycastHit2D.collider == null) state = State.fall;
                     break;
@@ -95,11 +108,6 @@ public class PlayerMove : MonoBehaviourPun
                     HorizontalInput = Input.GetAxisRaw("Horizontal");
                     Move();
                     fallfrom = transform.position.y;
-                    if (!isJumping)
-                    {
-                        Jump();
-                        isJumping = true;
-                    }
 
                     if (rigid2D.velocity.y < 0.5f) state = State.fall;
                     break;
@@ -142,7 +150,7 @@ public class PlayerMove : MonoBehaviourPun
         rigid2D.velocity = new Vector2(HorizontalInput * speed , rigid2D.velocity.y);
     }
 
-    private void Jump()
+    public void Jump()
     {
         rigid2D.velocity = new Vector2(rigid2D.velocity.x, jumpForce);
     }
@@ -175,5 +183,11 @@ public class PlayerMove : MonoBehaviourPun
         }
         else isSlope = false;
     }
+    [PunRPC]
+    void JumpSound()
+    {
+        GetComponent<AudioSource>().PlayOneShot(jumpsound);
+    }
+
 }
 

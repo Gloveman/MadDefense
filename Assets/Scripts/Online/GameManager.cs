@@ -91,6 +91,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         instance = this;
         PlayerMove.manager = this;
+        Player2.manager = this;
     }
 
     
@@ -252,10 +253,10 @@ public class GameManager : MonoBehaviourPunCallbacks
             if (PlayerMove.LocalPlayerInstance == null)
             {
                 Debug.Log(SpawnPoint.ToString());
-                //if (PhotonNetwork.IsMasterClient)
-                    Player = PhotonNetwork.Instantiate("Player", new Vector3(SpawnPoint.x +0.5f, SpawnPoint.y + 0.5f, 0) , Quaternion.identity, 0);
-                //else
-                //    Player = PhotonNetwork.Instantiate("Player2", new Vector3(SpawnPoint.x + 0.5f, SpawnPoint.y + 0.5f, 0), Quaternion.identity, 0);
+                if (PhotonNetwork.IsMasterClient)
+                    Player = PhotonNetwork.Instantiate("Player", new Vector3(SpawnPoint.x + 0.5f, SpawnPoint.y + 0.5f, 0), Quaternion.identity, 0);
+                else
+                    Player = PhotonNetwork.Instantiate("Player2", new Vector3(SpawnPoint.x + 0.5f, SpawnPoint.y + 0.5f, 0), Quaternion.identity, 0);
                 Debug.Log(Camera.main.GetComponent<CameraMove>().player);
                 Camera.main.GetComponent<CameraMove>().player = Player;
                 Debug.Log(Camera.main.GetComponent<CameraMove>().player);
