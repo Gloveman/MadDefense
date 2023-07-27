@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using WebSocketSharp;
 
 public class TileMap : MonoBehaviour
@@ -25,8 +26,8 @@ public class TileMap : MonoBehaviour
     [SerializeField]
     private TMP_InputField inputlimit;
 
-    public int Width { private set; get; } = 30;
-    public int Height { private set; get; } = 20;
+    public int Width { private set; get; } = 15;
+    public int Height { private set; get; } = 10;
     // Start is called before the first frame update
 
     private void Awake()
@@ -45,6 +46,10 @@ public class TileMap : MonoBehaviour
         tile.Setup(type);
     }
 
+    public void GoBack()
+    {
+        SceneManager.LoadScene("MapSelect");
+    }
     public void GenerateMap()
     {
         foreach (Transform t in transform)
@@ -59,7 +64,7 @@ public class TileMap : MonoBehaviour
         {
             for (int x = 0; x < Width; x++)
             {
-                Vector3 pos = new Vector3((-Width * 0.5f + 0.5f) + x, (Height * 0.5f - 0.5f) - y, 0);
+                Vector3 pos = new Vector3((-Width * 0.5f + 0.5f) + x, (Height * 0.5f - 0.5f) - y, -1);
                 SpawnTile(TileType.Empty, pos);
             }
         }
@@ -72,11 +77,9 @@ public class TileMap : MonoBehaviour
         var json=new JObject();
         string Filename=inputname.text.ToString();
         string Timelimit=inputlimit.text.ToString();
-        string level=inputlevel.text.ToString();
         json.Add("ContentType", "savemap");
         json.Add("name",Filename);
         json.Add("time",Timelimit);
-        json.Add("level",level);
 
         var jarray=new JArray();
         foreach (Transform t in transform)

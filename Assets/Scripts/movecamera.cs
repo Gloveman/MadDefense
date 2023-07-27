@@ -51,6 +51,7 @@ public class movecamera : MonoBehaviour
             transform.position = pos;
         }
         maxViewSize = mainCamera.orthographicSize;
+        transform.position = new Vector3(0, height/5.0f, -10);
 
     }
     public void SetPosition(float x,float y)

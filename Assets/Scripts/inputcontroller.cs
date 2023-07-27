@@ -24,7 +24,7 @@ public class inputcontroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) return;
+        //if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) return;
         UpdateCamera();
         RaycastHit hit;
         if(Input.GetMouseButton(0))
@@ -55,6 +55,22 @@ public class inputcontroller : MonoBehaviour
                         tile.Tiletype = curtype;
                 }
             
+            }
+        }
+        else if(Input.GetMouseButton(1))
+        {
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            {
+
+                tile tile = hit.transform.GetComponent<tile>();
+                if (tile != null)
+                {
+                    
+                    tile.Tiletype = TileType.Empty;
+                }
+
             }
         }
     }
